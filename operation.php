@@ -258,7 +258,75 @@
 
         $con->close();
 
-        header("Location:dapur_packageInfo.html");
+        header("Location:dapur_packageInfo.php");
+
+    }
+
+    //package update
+    if(isset($_POST["dapurPackageUpdate"])){
+
+        //echo "Menjadi";
+
+        $PackageID= $_POST["PackageID"];
+        $PackageName = $_POST["PackageName"];
+        $PackagePrice = $_POST["PackagePrice"];
+        $PackageMinOrder = $_POST["PackageMinOrder"];
+
+        $query = "UPDATE package SET PackageName='$PackageName', PackagePrice=$PackagePrice, PackageMinOrder=$PackageMinOrder WHERE PackageID = $PackageID";
+
+        $result = mysqli_query($con, $query);
+
+        $con->close();
+
+        header("Location:dapur_packageInfo.php");
+
+    }
+    //package delete
+    if(isset($_POST["PackageDelete"])){
+
+        //echo "Menjadi";
+
+        $PackageID= $_POST["PackageID"];
+
+        $query = "DELETE FROM package WHERE PackageID = $PackageID";
+
+        $result = mysqli_query($con, $query);
+
+        $con->close();
+
+        header("Location:dapur_packageInfo.php");
+
+    }
+    //order accept
+    if(isset($_POST["OrderAccept"])){
+
+        //echo "Menjadi";
+
+        $OrderID= $_POST["OrderID"];
+
+        $query = "UPDATE ordertable SET OrderStatus = 'Pending' WHERE OrderID = $OrderID";
+
+        $result = mysqli_query($con, $query);
+
+        $con->close();
+
+        header("Location:dapur_orderNew.php");
+
+    }
+    //order finish
+    if(isset($_POST["OrderFinished"])){
+
+        //echo "Menjadi";
+
+        $OrderID= $_POST["OrderID"];
+
+        $query = "UPDATE ordertable SET OrderStatus = 'Finished' WHERE OrderID = $OrderID";
+
+        $result = mysqli_query($con, $query);
+
+        $con->close();
+
+        header("Location:dapur_orderPending.php");
 
     }
 

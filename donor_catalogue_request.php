@@ -128,7 +128,9 @@
                                     </h3>
                                     <p class="product-text price">Location:<?php echo $rowView["RequestLocation"]; ?></p>
                                     <form action="operation.php" method="POST">
-                                        <input name="donateRequestSubmit" type="submit" value="Donate">
+                                        <input name="RequestID" type="text" value="<?php echo $rowView["RequestID"]; ?>" hidden>
+                                        <input name="PackageID" type="text" value="<?php echo $rowView["PackageID"]; ?>" hidden>
+                                        <input name="donorRequest" type="submit" value="Donate">
                                     </form>
                                 </div>
                             </div>

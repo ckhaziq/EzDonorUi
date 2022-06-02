@@ -154,7 +154,6 @@
                                 }
                             } else{ 
                             ?>
-
                                 <tr>
                                     <td colspan="5">No Data</td>
                                 </tr>

@@ -128,10 +128,14 @@
                                         <small>ID: <?php echo $rowView["PackageID"]; ?></small>
                                     </h3>
                                     <p class="product-text price">Price: <?php echo $rowView["PackagePrice"]; ?></p>
-                                    <p class="product-text genre">Minimum Order:
-                                        <?php echo $rowView["PackageMinOrder"]; ?></p>
+                                    <p class="product-text genre">Minimum Order: <?php echo $rowView["PackageMinOrder"]; ?></p>
                                     <form action="operation.php" method="POST">
-                                        <input name="donateDoneeSubmit" type="submit" value="Donate">
+                                        <input name="PackageID" type="text" value="<?php echo $rowView["PackageID"]; ?>" hidden>
+                                        <input name="PackageName" type="text" value="<?php echo $rowView["PackageName"]; ?>" hidden>
+                                        <input name="PackagePrice" type="text" value="<?php echo $rowView["PackagePrice"]; ?>" hidden>
+                                        <input name="PackageMinOrder" type="text" value="<?php echo $rowView["PackageMinOrder"]; ?>" hidden>
+                                        <input name="DapurID" type="text" value="<?php echo $rowView["DapurID"]; ?>" hidden>
+                                        <input name="donorPackage" type="submit" value="Donate">
                                     </form>
                                 </div>
                             </div>

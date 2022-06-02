@@ -129,7 +129,8 @@
                                     <p class="product-text price">Phone Number:<?php echo $rowView["DoneeCataloguePhoneNumber"]; ?></p>
                                     <p class="product-text genre">Description:<?php echo $rowView["DoneeCatalogueDescription"]; ?></p>
                                     <form action="operation.php" method="POST">
-                                        <input name="donateDoneeSubmit" type="submit" value="Donate">
+                                        <input name="DoneeCatalogueID" type="text" value="<?php echo $rowView["DoneeCatalogueID"]; ?>" hidden>
+                                        <input name="donorDonee" type="submit" value="Donate">
                                     </form>
                                 </div>
                             </div>

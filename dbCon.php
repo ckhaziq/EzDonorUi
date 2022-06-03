@@ -18,7 +18,7 @@ if($con){
      die($con);
 }
 // PayPal Configuration
-define('PAYPAL_EMAIL', 'che.haziq98@gmail.com'); 
+define('PAYPAL_EMAIL', 'sb-40adh16866719@business.example.com'); 
 define('RETURN_URL', 'http://localhost/EzDonorUi/return.php'); 
 define('CANCEL_URL', 'http://localhost/EzDonorUi/cancel.php'); 
 define('NOTIFY_URL', 'http://localhost/EzDonorUi/operation.php'); 

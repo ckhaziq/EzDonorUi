@@ -485,13 +485,17 @@ http://curl.haxx.se/docs/caextract.html
     $res = trim(end($tokens));
     if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
         // assign posted variables to local variables
-        $item_number = $_POST['item_number'];
-        $item_name = $_POST['item_name'];
-        $payment_status = $_POST['payment_status'];
-        $amount = $_POST['mc_gross'];
-        $currency = $_POST['mc_currency'];
+        $DoneeID = $_POST['DoneeID'];
+        $RequestID = $_POST['RequestID'];
+        $PackageID = $_POST['PackageID'];
+        $PackagePrice = $_POST['PackagePrice'];
+        $PaymentAmount = $_POST['PaymentAmount'];
+        $PaymentTotalPrice = $_POST['PaymentTotalPrice'];
+        $PaymentMethod = $_POST['PaymentMethod'];
+        $Currency = $_POST['Currency'];
         $txn_id = $_POST['txn_id'];
-        $receiver_email = $_POST['receiver_email'];
+        $ReceiverEmail = $_POST['ReceiverEmail'];
+
         // $payer_email = $_POST['payer_email'];
 
         // check that receiver_email is your PayPal business email
@@ -502,43 +506,51 @@ http://curl.haxx.se/docs/caextract.html
         }
 
         // check that payment currency is correct
-        if (strtolower($currency) != strtolower(CURRENCY)) {
+        if (strtolower($Currency) != strtolower(CURRENCY)) {
             error_log(date('[Y-m-d H:i e] ') .
                 "Invalid Currency: $req" . PHP_EOL, 3, IPN_LOG_FILE);
             exit();
         }
 
         //Check Unique Transcation ID
-        $db = new DB;
-        $db->query("SELECT * FROM `payment_info` WHERE txn_id=:txn_id");
-        $db->bind(':txn_id', $txn_id);
-        $db->execute();
-        $unique_txn_id = $db->rowCount();
+        //$db = new DB;
+        //$db->query("SELECT * FROM payment WHERE txn_id=:txn_id");
+        //$db->bind(':txn_id', $txn_id);
+        //$db->execute();
+        //$unique_txn_id = $db->rowCount();
 
+        $sqlView = "SELECT * FROM payment WHERE txn_id = txn_id";
+
+        $resultView = $con->query($sqlView);
+
+        if($resultView->num_rows>0){
+            while($rowView = $resultView->fetch_assoc()){
+                $unique_txn_id = $rowView["PackageName"];
+            }
+        }
         if (!empty($unique_txn_id)) {
             error_log(date('[Y-m-d H:i e] ') .
                 "Invalid Transaction ID: $req" . PHP_EOL, 3, IPN_LOG_FILE);
-            $db->close();
+            //$db->close();
             exit();
         } else {
-            $db->query("INSERT INTO `payment_info`
-			(`item_number`, `item_name`, `payment_status`,
-				 `amount`, `currency`, `txn_id`)
-			VALUES
-			(:item_number, :item_name, :payment_status, 
-				:amount, :currency, :txn_id)");
-            $db->bind(":item_number", $item_number);
-            $db->bind(":item_name", $item_name);
-            $db->bind(":payment_status", $payment_status);
-            $db->bind(":amount", $amount);
-            $db->bind(":currency", $currency);
-            $db->bind(":txn_id", $txn_id);
-            $db->execute();
+            $sqlInsert = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, PaymentAmount, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail)	
+			VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$PaymentAmount', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail')";
+
+            $resultInsert = $con->query($sqlInsert);
+
+            //$db->bind(":item_number", $item_number);
+            //$db->bind(":item_name", $item_name);
+            //$db->bind(":payment_status", $payment_status);
+            //$db->bind(":amount", $amount);
+            //$db->bind(":currency", $currency);
+            //$db->bind(":txn_id", $txn_id);
+            //$db->execute();
             /* error_log(date('[Y-m-d H:i e] '). 
 		"Verified IPN: $req ". PHP_EOL, 3, IPN_LOG_FILE);
 		*/
         }
-        $db->close();
+        //$db->close();
     } else if (strcmp($res, "INVALID") == 0) {
         //Log invalid IPN messages for investigation
         error_log(date('[Y-m-d H:i e] ') .

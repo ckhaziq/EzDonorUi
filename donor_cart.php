@@ -21,28 +21,30 @@
 <?php
 include 'dbCon.php';
 //package
-$PackageID = $_SESSION['PackageID'];
+if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
+    $PackageID = $_SESSION['PackageID'];
 
-$sqlView = "SELECT * FROM package WHERE PackageID = $PackageID";
+    $sqlView = "SELECT * FROM package WHERE PackageID = $PackageID";
 
-$resultView = $con->query($sqlView);
+    $resultView = $con->query($sqlView);
 
-if ($resultView->num_rows > 0) {
-    while ($rowView = $resultView->fetch_assoc()) {
-        $PackageName = $rowView['PackageName'];
-        $PackagePrice = $rowView['PackagePrice'];
-        $PackageMinOrder = $rowView['PackageMinOrder'];
-        $DapurID = $rowView['DapurID'];
-        $Shipping = 5;
+    if ($resultView->num_rows > 0) {
+        while ($rowView = $resultView->fetch_assoc()) {
+            $PackageName = $rowView['PackageName'];
+            $PackagePrice = $rowView['PackagePrice'];
+            $PackageMinOrder = $rowView['PackageMinOrder'];
+            $DapurID = $rowView['DapurID'];
+            $Shipping = 5;
+        }
     }
-}
-$sqlViewDapur = "SELECT * FROM dapur WHERE DapurID = $DapurID";
+    $sqlViewDapur = "SELECT * FROM dapur WHERE DapurID = $DapurID";
 
-$resultViewDapur = $con->query($sqlViewDapur);
+    $resultViewDapur = $con->query($sqlViewDapur);
 
-if ($resultViewDapur->num_rows > 0) {
-    while ($rowViewDapur = $resultViewDapur->fetch_assoc()) {
-        $DapurName = $rowViewDapur['DapurName'];
+    if ($resultViewDapur->num_rows > 0) {
+        while ($rowViewDapur = $resultViewDapur->fetch_assoc()) {
+            $DapurName = $rowViewDapur['DapurName'];
+        }
     }
 }
 //donee
@@ -79,14 +81,12 @@ if (isset($_SESSION['RequestID']) && $_SESSION['RequestID'] != "") {
     }
 }
 
-if(isset($_POST["CalcTotalALL"])) {
+if (isset($_POST["CalcTotalALL"])) {
     $_SESSION['calcPrice'] = $_POST["calcPrice"];
     $_SESSION['calcPackage'] = $_POST["calcPackage"];
     $_SESSION['calcTotal'] = $_POST["calcTotal"];
 
     $_SESSION['calcTotalALL'] = $_POST["calcTotal"] + 5;
-
-    echo $_SESSION['calcTotalALL'];
 }
 
 ?>
@@ -201,7 +201,9 @@ if(isset($_POST["CalcTotalALL"])) {
                                     <div class="layout-inline row">
 
                                         <!--package-->
-
+                                        <?php 
+                                            if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
+                                        ?>
                                         <div class="col col-pro layout-inline">
                                             <img src="" alt="" />
                                             <p><?php echo $PackageName; ?></p>
@@ -213,7 +215,11 @@ if(isset($_POST["CalcTotalALL"])) {
 
                                         <div class="col col-qty layout-inline">
                                             <a href="#" class="qty qty-minus">-</a>
-                                            <input id="quantityPackage" name="quantity" type="numeric" value="<?php if (isset($_SESSION['calcPackage'])) { echo $_SESSION['calcPackage']; } else{echo 3;} ?>" />
+                                            <input id="quantityPackage" name="quantity" type="numeric" value="<?php if (isset($_SESSION['calcPackage'])) {
+                                                                                                                    echo $_SESSION['calcPackage'];
+                                                                                                                } else {
+                                                                                                                    echo 3;
+                                                                                                                } ?>" />
                                             <a href="#" class="qty qty-plus">+</a>
                                         </div>
 
@@ -221,8 +227,13 @@ if(isset($_POST["CalcTotalALL"])) {
                                             <p><?php echo $DapurName; ?></p>
                                         </div>
                                         <div class="col col-total col-numeric">
-                                            <p id="totalPackage"><?php if (isset($_SESSION['calcTotal'])) { echo $_SESSION['calcTotal']; } else{echo 0;} ?></p>
+                                            <p id="totalPackage"><?php if (isset($_SESSION['calcTotal'])) {
+                                                                        echo $_SESSION['calcTotal'];
+                                                                    } else {
+                                                                        echo 0;
+                                                                    } ?></p>
                                         </div>
+                                        <?php } ?>
                                     </div>
 
                                     <!--donee-->
@@ -295,7 +306,11 @@ if(isset($_POST["CalcTotalALL"])) {
                                             </div>
                                             <div class="col">
                                                 <div style="max-width: 300px; text-align:right;">
-                                                    <p><?php if (isset($_SESSION['calcTotalALL'])) { echo $_SESSION['calcTotalALL']; } else{echo 11;} ?></p>
+                                                    <p><?php if (isset($_SESSION['calcTotalALL'])) {
+                                                            echo $_SESSION['calcTotalALL'];
+                                                        } else {
+                                                            echo 11;
+                                                        } ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -305,10 +320,10 @@ if(isset($_POST["CalcTotalALL"])) {
 
                                 <div class="row layout-inline">
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
-                                        <form action="" method="POST">
-                                            <input id="calcPrice" name="calcPrice" type="text" value="0">
-                                            <input id="calcPackage" name="calcPackage" type="text" value="0">
-                                            <input id="calcTotal" name="calcTotal" type="text" value="0">
+                                        <form action="<?php echo PAYPAL_URL; ?>" method="POST">
+                                            <input hidden id="calcPrice" name="calcPrice" type="text" value="0">
+                                            <input hidden id="calcPackage" name="calcPackage" type="text" value="0">
+                                            <input hidden id="calcTotal" name="calcTotal" type="text" value="0">
                                             <input name="CalcTotalALL" type="submit" value="Total ALL">
                                         </form>
                                     </div>
@@ -316,7 +331,7 @@ if(isset($_POST["CalcTotalALL"])) {
                                     <a href="donor_catalogue_request.php" class="btn btn-update">Change Request</a>
                                     <a href="donor_catalogue_donee.php" class="btn btn-update">Change Donee</a>
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
-                                        <form action="<?php echo PAYPAL_URL; ?>" method="POST">
+                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
                                             <input name="DoneeID" type="text" value="<?php echo $DoneeID; ?>" hidden>
                                             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
                                             <input name="PackageID" type="text" value="<?php echo $PackageID; ?>" hidden>

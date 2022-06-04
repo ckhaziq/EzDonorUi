@@ -90,12 +90,14 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     $RequestID = $_POST['RequestID'];
     $PackageID = $_POST['PackageID'];
     $PackagePrice = $_POST['PackagePrice'];
+    $DapurID = $_POST['DapurID'];
     $PaymentAmount = $_POST['PaymentAmount'];
-    $PaymentTotalPrice = $_POST['PaymentTotalPrice'];
+    $item_name = $_POST['item_name'];
+    $PaymentTotalPrice = $_POST['amount'];
     $PaymentMethod = $_POST['PaymentMethod'];
-    $Currency = $_POST['Currency'];
+    $Currency = $_POST['currency_code'];
     $txn_id = $_POST['txn_id'];
-    $ReceiverEmail = $_POST['ReceiverEmail'];
+    $ReceiverEmail = $_POST['business'];
 
     // $payer_email = $_POST['payer_email'];
 
@@ -126,7 +128,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
 
     if ($resultView->num_rows > 0) {
         while ($rowView = $resultView->fetch_assoc()) {
-            $unique_txn_id = $rowView["PackageName"];
+            $unique_txn_id = $rowView["txn_id"];
         }
     }
     if (!empty($unique_txn_id)) {
@@ -135,8 +137,8 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
         //$db->close();
         exit();
     } else {
-        $sqlInsert = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, PaymentAmount, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail)
-        VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$PaymentAmount', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail')";
+        $sqlInsert = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, DapurID, PaymentAmount, item_name, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail)
+        VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$DapurID','$PaymentAmount', '$item_name', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail')";
 
         $resultInsert = $con->query($sqlInsert);
 

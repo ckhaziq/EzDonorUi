@@ -16,11 +16,11 @@ if (isset($_POST["loginSubmit"])) {
     $UserPassword = $_POST["loginPassword"];
 
     if (empty($UserUsername)) {
-        echo "User Name is required";
+        //echo "User Name is required";
         header("Location:index.php?error=User Name is required");
         exit();
     } else if (empty($UserPassword)) {
-        echo "Password is required";
+        //echo "Password is required";
         header("Location:index.php?error=Password is required");
         exit();
     } else {
@@ -77,12 +77,12 @@ if (isset($_POST["loginSubmit"])) {
 
                 exit();
             } else {
-                echo "Incorect User name or password";
+                //echo "Incorect User name or password";
                 header("Location:index.php?error=Incorect User name or password");
                 exit();
             }
         } else {
-            echo "Incorect User name or password";
+            //echo "Incorect User name or password";
             header("Location:index.php?error=Incorect User name or password");
             exit();
         }
@@ -177,14 +177,13 @@ if (isset($_POST["requestSubmit"])) {
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
     // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "<h3>  Image uploaded successfully!</h3>";
+    if (move_uploaded_file($tempname,$folder)) {
+        //echo "<h3>  Image uploaded successfully!</h3>";
     } else {
-       echo "<h3>  Failed to upload image!</h3>";
+       //echo "<h3>  Failed to upload image!</h3>";
     }
 
     $con->close();
-
     header("Location:request.html");
 }
 
@@ -267,7 +266,7 @@ if (isset($_POST["dapurPackageSubmit"])) {
     $tempname = $_FILES["PackageImage"]["tmp_name"];
     $folder = "./image/" . $filename;
 
-    echo $filename;
+    //echo $filename;
 
     $query = "INSERT INTO package(PackageName, PackagePrice, PackageMinOrder, DapurID, PackageImage) VALUES('$PackageName', '$PackagePrice', '$PackageMinOrder', '$DapurID', '$filename')";
 
@@ -275,14 +274,14 @@ if (isset($_POST["dapurPackageSubmit"])) {
 
     // Now let's move the uploaded image into the folder: image
     if (move_uploaded_file($tempname, $folder)) {
-        echo "<h3>  Image uploaded successfully!</h3>";
+        //echo "<h3>  Image uploaded successfully!</h3>";
     } else {
-        echo "<h3>  Failed to upload image!</h3>";
+        //echo "<h3>  Failed to upload image!</h3>";
     }
 
     $con->close();
 
-    //header("Location:dapur_packageInfo.php");
+    header("Location:dapur_packageInfo.php");
 }
 
 //package update
@@ -352,7 +351,7 @@ if (isset($_POST["OrderFinished"])) {
 //admin approval
 if (isset($_POST["adminApprove"])) {
 
-    echo "Menjadi";
+    //echo "Menjadi";
 
     $RequestID = $_POST["RequestID"];
     $AdminID = $_SESSION["AdminID"];
@@ -361,9 +360,9 @@ if (isset($_POST["adminApprove"])) {
     $queryApproval = "INSERT INTO approval(RequestID , AdminID, ApprovalStatus) VALUES('$RequestID', '$AdminID' , '$ApprovalStatus')";
     $resultApproval = mysqli_query($con, $queryApproval);
 
-    echo "$AdminID";
-    echo "$RequestID";
-    echo "$ApprovalStatus";
+    //echo "$AdminID";
+    //echo "$RequestID";
+    //echo "$ApprovalStatus";
 
     $sqlApprocalID = "SELECT * FROM approval WHERE RequestID = '$RequestID'";
     $resultApprocalID = mysqli_query($con, $sqlApprocalID);
@@ -380,7 +379,7 @@ if (isset($_POST["adminApprove"])) {
 //admin declibne
 if (isset($_POST["adminDecline"])) {
 
-    echo "Menjadi";
+    //echo "Menjadi";
 
     $RequestID = $_POST["RequestID"];
     $AdminID = $_SESSION["AdminID"];
@@ -389,9 +388,9 @@ if (isset($_POST["adminDecline"])) {
     $queryApproval = "INSERT INTO approval(RequestID , AdminID, ApprovalStatus) VALUES('$RequestID', '$AdminID' , '$ApprovalStatus')";
     $resultApproval = mysqli_query($con, $queryApproval);
 
-    echo "$AdminID";
-    echo "$RequestID";
-    echo "$ApprovalStatus";
+    //echo "$AdminID";
+    //echo "$RequestID";
+    //echo "$ApprovalStatus";
 
     $sqlApprocalID = "SELECT * FROM approval WHERE RequestID = '$RequestID'";
     $resultApprocalID = mysqli_query($con, $sqlApprocalID);

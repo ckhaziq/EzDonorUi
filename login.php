@@ -8,18 +8,18 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,800" rel='stylesheet' type='text/css'>
 
     <?php
-    include("dbCon.php");
-    if(isset($_SESSION['AdminID']) && $_SESSION['DonorID'] == true){
-        header("Location:admin_dashboard.html");
+
+    if(isset($_SESSION['AdminID']) && isset($_SESSION['UserID'])){
+        header("Location:admin_dashboard.php");
     }
-    if(isset($_SESSION['DonorID']) && $_SESSION['DonorID'] == true){
-        header("Location:donor_dashboard.html");
+    if(isset($_SESSION['DonorID']) && isset($_SESSION['UserID'])){
+        header("Location:donor_dashboard.php");
     }
-    if(isset($_SESSION['DoneeID']) && $_SESSION['DonorID'] == true){
-        header("Location:donee_dashboard.html");
+    if(isset($_SESSION['DoneeID']) && isset($_SESSION['UserID'])){
+        header("Location:donee_dashboard.php");
     }
-    if(isset($_SESSION['DapurID']) && $_SESSION['DonorID'] == true){
-        header("Location:dapur_dashboard.html");
+    if(isset($_SESSION['DapurID']) && isset($_SESSION['UserID'])){
+        header("Location:dapur_dashboard.php");
     }
 ?>
 

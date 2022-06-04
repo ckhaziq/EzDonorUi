@@ -89,7 +89,12 @@ window.onload = function() {
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="login.php">Login</a>
+            <?php if (isset($_SESSION['UserID'])) {
+                //echo $_SESSION['AdminID'] ?>
+                <a href="logout.php">Log Out</a>
+            <?php } else { ?>
+                <a href="login.php">Login</a>
+            <?php } ?>
         </div>
     </div>
 

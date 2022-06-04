@@ -1,4 +1,3 @@
-<?php  ?>
 <?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +29,7 @@ echo $_SESSION['PackageID'];
 if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
     $PackageID = $_SESSION['PackageID'];
 
-    echo $PackageID;
+    //echo $PackageID;
 
     $sqlView = "SELECT * FROM package WHERE PackageID = $PackageID";
 
@@ -60,7 +59,7 @@ if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
 if (isset($_SESSION['DoneeCatalogueID']) && $_SESSION['DoneeCatalogueID'] != "") {
     $DoneeCatalogueID = $_SESSION['DoneeCatalogueID'];
 
-    echo $DoneeCatalogueID;
+    //echo $DoneeCatalogueID;
 
     $sqlViewDonee = "SELECT * FROM doneecatalogue WHERE DoneeCatalogueID = $DoneeCatalogueID";
 
@@ -119,7 +118,12 @@ if (isset($_POST["CalcTotalALL"])) {
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="login.php">Login</a>
+            <?php if (isset($_SESSION['UserID'])) {
+                //echo $_SESSION['AdminID'] ?>
+                <a href="logout.php">Log Out</a>
+            <?php } else { ?>
+                <a href="login.php">Login</a>
+            <?php } ?>
         </div>
     </div>
     </div>
@@ -341,12 +345,14 @@ if (isset($_POST["CalcTotalALL"])) {
                                     <a href="donor_catalogue_request.php" class="btn btn-update">Change Request</a>
                                     <a href="donor_catalogue_donee.php" class="btn btn-update">Change Donee</a>
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
-                                        <form action="<?php echo PAYPAL_URL; ?>" method="POST">
+                                        <form action="donor_payment.php" method="POST">
                                             <input name="DoneeID" type="text" value="<?php echo $DoneeID; ?>" hidden>
                                             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
                                             <input name="PackageID" type="text" value="<?php echo $PackageID; ?>" hidden>
                                             <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>" hidden>
+                                            <input name="$DapurID" type="text" value="<?php echo $$DapurID; ?>" hidden>
                                             <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>" hidden>
+                                            <input name="item_name" type="text" value="<?php echo $PackageName; ?>" hidden>
                                             <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
                                             <input name="PaymentMethod" type="text" value="PayPal" hidden>
                                             <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>" hidden>

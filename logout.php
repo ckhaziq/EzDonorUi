@@ -1,6 +1,6 @@
 <?php
 // Initialize the session
-include 'dbCon.php';
+
  
 // Unset all of the session variables
 $_SESSION = array();

@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +32,7 @@
 
     <div class="products products-table">
         <?php 
-        include 'dbCon.php';
+        
                                 
         $sqlView = "SELECT * FROM doneecatalogue";
 

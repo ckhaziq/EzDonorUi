@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 

@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +23,7 @@
 </head>
 
 <?php
-    include 'dbCon.php';
+    
     //request
     //TotalRequest
     $resultTotalOrder = mysqli_query($con, "SELECT COUNT(*) AS TotalOrder FROM ordertable");

@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +19,7 @@
 </head>
 
 <?php
-include 'dbCon.php';
+
 ?>
 
 <body>
@@ -588,7 +589,7 @@ include 'dbCon.php';
     }
 
     .openNav .menu {
-        top 73px;
+        top :73px;
         transform: translate3d(200px, 0, 0);
         transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
     }

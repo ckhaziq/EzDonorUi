@@ -1,3 +1,5 @@
+<?php  ?>
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -18,11 +20,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
+
+
+<body>
 <?php
-include 'dbCon.php';
+
+echo $_SESSION['PackageID'];
 //package
 if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
     $PackageID = $_SESSION['PackageID'];
+
+    echo $PackageID;
 
     $sqlView = "SELECT * FROM package WHERE PackageID = $PackageID";
 
@@ -51,6 +59,9 @@ if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
 
 if (isset($_SESSION['DoneeCatalogueID']) && $_SESSION['DoneeCatalogueID'] != "") {
     $DoneeCatalogueID = $_SESSION['DoneeCatalogueID'];
+
+    echo $DoneeCatalogueID;
+
     $sqlViewDonee = "SELECT * FROM doneecatalogue WHERE DoneeCatalogueID = $DoneeCatalogueID";
 
     $resultViewDonee = $con->query($sqlViewDonee);
@@ -67,6 +78,8 @@ if (isset($_SESSION['DoneeCatalogueID']) && $_SESSION['DoneeCatalogueID'] != "")
 //request
 if (isset($_SESSION['RequestID']) && $_SESSION['RequestID'] != "") {
     $RequestID = $_SESSION['RequestID'];
+
+    //echo $DoneeCatalogueID;
 
     $sqlViewRequest2 = "SELECT * FROM request WHERE RequestID = $RequestID";
 
@@ -90,8 +103,6 @@ if (isset($_POST["CalcTotalALL"])) {
 }
 
 ?>
-
-<body>
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
@@ -319,7 +330,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
                                 <div class="row layout-inline">
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
-                                        <form action="<?php echo PAYPAL_URL; ?>" method="POST">
+                                        <form action="" method="POST">
                                             <input hidden id="calcPrice" name="calcPrice" type="text" value="0">
                                             <input hidden id="calcPackage" name="calcPackage" type="text" value="0">
                                             <input hidden id="calcTotal" name="calcTotal" type="text" value="0">
@@ -330,16 +341,16 @@ if (isset($_POST["CalcTotalALL"])) {
                                     <a href="donor_catalogue_request.php" class="btn btn-update">Change Request</a>
                                     <a href="donor_catalogue_donee.php" class="btn btn-update">Change Donee</a>
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
-                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+                                        <form action="<?php echo PAYPAL_URL; ?>" method="POST">
                                             <input name="DoneeID" type="text" value="<?php echo $DoneeID; ?>" hidden>
                                             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
                                             <input name="PackageID" type="text" value="<?php echo $PackageID; ?>" hidden>
                                             <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>" hidden>
                                             <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>" hidden>
-                                            <input name="PaymentTotalPrice" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
+                                            <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
                                             <input name="PaymentMethod" type="text" value="PayPal" hidden>
-                                            <input name="Currency" type="text" value="<?php echo CURRENCY; ?>" hidden>
-                                            <input name="ReceiverEmail" type="text" value="<?php echo PAYPAL_EMAIL; ?>" hidden>
+                                            <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>" hidden>
+                                            <input name="business" type="text" value="<?php echo PAYPAL_EMAIL; ?>" hidden>
 
                                             <input name="return" type="text" value="<?php echo RETURN_URL; ?>" hidden>
                                             <input name="cancel_return" type="text" value="<?php echo CANCEL_URL; ?>" hidden>
@@ -1187,7 +1198,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
     }
 
-    //cart 
+    //cart
     html {
         background: #bbc3c6;
         font: 62.5%/1.5em "Trebuchet Ms", helvetica;

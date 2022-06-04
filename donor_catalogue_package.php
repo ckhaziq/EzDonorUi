@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +19,7 @@
 </head>
 
 <?php
-include 'dbCon.php';
+
 ?>
 
 <body>

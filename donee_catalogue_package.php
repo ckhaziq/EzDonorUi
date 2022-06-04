@@ -1,3 +1,4 @@
+<?php include 'dbCon.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +19,7 @@
 </head>
 
 <?php
-include 'dbCon.php';
+
 ?>
 
 <body>
@@ -286,7 +287,7 @@ include 'dbCon.php';
         color: white;
     }
 
-    //dashboard
+    <!--dashboard-->
     body {
         font-family: 'Work Sans', sans-serif;
         margin: 0;
@@ -564,11 +565,11 @@ include 'dbCon.php';
     .openNav .menu:hover {
         position: absolute;
         left: -200px;
-        top 73px;
+        top:73px;
     }
 
     .openNav .menu {
-        top 73px;
+        top: 73px;
         transform: translate3d(200px, 0, 0);
         transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
     }
@@ -785,7 +786,7 @@ include 'dbCon.php';
         position: relative;
     }
 
-    blockquote:before {}
+
 
     blockquote cite,
     blockquote em,
@@ -951,12 +952,8 @@ include 'dbCon.php';
 
     }
 
-    //catalog
-    @media screen and (max-width:400px) {
-        .search-area {
-            width: 100%;
-        }
-    }
+    <!--catalog-->
+
 
     .products {
         width: 100%;
@@ -976,7 +973,6 @@ include 'dbCon.php';
         width: auto;
         height: 200px;
         max-width: calc(100% - 20px);
-        background-cover: fit;
         box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.8);
         border-radius: 2px;
     }

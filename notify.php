@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include 'dbCon.php';
 
@@ -98,6 +98,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     $Currency = $_POST['currency_code'];
     $txn_id = $_POST['txn_id'];
     $ReceiverEmail = $_POST['business'];
+    $OrderID = $_POST['OrderID'];
 
     // $payer_email = $_POST['payer_email'];
 
@@ -137,10 +138,30 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
         //$db->close();
         exit();
     } else {
-        $sqlInsert = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, DapurID, PaymentAmount, item_name, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail)
-        VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$DapurID','$PaymentAmount', '$item_name', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail')";
+        $sqlInsert = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, DapurID, PaymentAmount, item_name, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail, OrderID)
+        VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$DapurID','$PaymentAmount', '$item_name', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail', '$OrderID')";
 
         $resultInsert = $con->query($sqlInsert);
+
+        //law row
+        //last id payment
+        $queryLastIDP = "SELECT * FROM payment";
+        $resultLastIDP = $con->query($queryLastIDP);
+        if ($resultLastIDP->num_rows > 0) {
+            while ($rowP = $resultLastIDP->fetch_assoc()) {
+                $LastIDP = $rowP['PaymentID'];
+            }
+        }
+
+        $PaymentID = $LastIDP;
+        $OrderStatus = 'Paid';
+
+
+        //insert order
+        $queryUpdate = "UPDATE ordertable SET PaymentID='$PaymentID', OrderStatus='$OrderStatus''WHERE PaymentID='$PaymentID'";
+        $resultUpdate = mysqli_query($con, $queryUpdate);
+
+        $con->close();
 
         //$db->bind(":item_number", $item_number);
         //$db->bind(":item_name", $item_name);

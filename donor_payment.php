@@ -29,6 +29,7 @@ if (isset($_GET["paymentPayPal"])) {
 
     $resultOrder = mysqli_query($con, $queryOrder);
 
+    //last id order
     $queryLastID = "SELECT * FROM ordertable";
     $resultLastID = $con->query($queryLastID);
     if ($resultLastID->num_rows > 0) {
@@ -36,6 +37,8 @@ if (isset($_GET["paymentPayPal"])) {
             $LastID = $row['OrderID'];
         }
     }
+
+    $OrderID = $LastID;
 
 
 
@@ -51,13 +54,14 @@ if (isset($_GET["paymentPayPal"])) {
             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
             <input name="PackageID" type="text" value="<?php echo $PackageID; ?>" hidden>
             <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>" hidden>
-            <input name="$DapurID" type="text" value="<?php echo $$DapurID; ?>" hidden>
+            <input name="DapurID" type="text" value="<?php echo $$DapurID; ?>" hidden>
             <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>" hidden>
             <input name="item_name" type="text" value="<?php echo $PackageName; ?>" hidden>
             <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
             <input name="PaymentMethod" type="text" value="PayPal" hidden>
             <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>" hidden>
             <input name="business" type="text" value="<?php echo PAYPAL_EMAIL; ?>" hidden>
+            <input name="OrderID" type="text" value="<?php echo $OrderID; ?>" hidden>
 
             <input name="return" type="text" value="<?php echo RETURN_URL; ?>" hidden>
             <input name="cancel_return" type="text" value="<?php echo CANCEL_URL; ?>" hidden>

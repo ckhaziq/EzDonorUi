@@ -121,7 +121,7 @@
                             ?>
                                     <div style="background-color:white;" class="product">
                                         <div class="product-img">
-                                            <img src="">
+                                            <img src="./image/<?php echo $rowView['PackageImage']; ?>">
                                         </div>
                                         <div class="product-content">
                                             <h3>Resquestee Name: <?php echo $rowView["RequestName"]; ?>

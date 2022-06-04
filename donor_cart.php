@@ -94,21 +94,21 @@ if (isset($_POST["CalcTotalALL"])) {
 <body>
 
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+                <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
     </div>
@@ -126,7 +126,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="#1">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="donor_dashboard">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
                         <li class="menu-hasdropdown">
@@ -138,9 +138,9 @@ if (isset($_POST["CalcTotalALL"])) {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown">
-                                <li><a href="">Donation Package Catalogue</a></li>
-                                <li><a href="">Donee Catalogue</a></li>
-                                <li><a href="">Donation Request Catalogue</a></li>
+                                <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
+                                <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
+                                <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
                             </ul>
                         </li>
 
@@ -153,12 +153,11 @@ if (isset($_POST["CalcTotalALL"])) {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown2">
-                                <li><a href="">All</a></li>
-                                <li><a href="">Pending</a></li>
-                                <li><a href="">Finished</a></li>
+                                <li><a href="donor_recordAll.php">All</a></li>
+                                <li><a href="donor_recordPending.php">Pending</a></li>
+                                <li><a href="donor_recordFinished.php">Finished</a></li>
                             </ul>
                         </li>
-
 
                     </ul>
 
@@ -201,38 +200,38 @@ if (isset($_POST["CalcTotalALL"])) {
                                     <div class="layout-inline row">
 
                                         <!--package-->
-                                        <?php 
-                                            if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
+                                        <?php
+                                        if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
                                         ?>
-                                        <div class="col col-pro layout-inline">
-                                            <img src="" alt="" />
-                                            <p><?php echo $PackageName; ?></p>
-                                        </div>
+                                            <div class="col col-pro layout-inline">
+                                                <img src="" alt="" />
+                                                <p><?php echo $PackageName; ?></p>
+                                            </div>
 
-                                        <div class="col col-price col-numeric align-center ">
-                                            <p id="pricePackage"><?php echo $PackagePrice; ?></p>
-                                        </div>
+                                            <div class="col col-price col-numeric align-center ">
+                                                <p id="pricePackage"><?php echo $PackagePrice; ?></p>
+                                            </div>
 
-                                        <div class="col col-qty layout-inline">
-                                            <a href="#" class="qty qty-minus">-</a>
-                                            <input id="quantityPackage" name="quantity" type="numeric" value="<?php if (isset($_SESSION['calcPackage'])) {
-                                                                                                                    echo $_SESSION['calcPackage'];
-                                                                                                                } else {
-                                                                                                                    echo 3;
-                                                                                                                } ?>" />
-                                            <a href="#" class="qty qty-plus">+</a>
-                                        </div>
+                                            <div class="col col-qty layout-inline">
+                                                <a href="#" class="qty qty-minus">-</a>
+                                                <input id="quantityPackage" name="quantity" type="numeric" value="<?php if (isset($_SESSION['calcPackage'])) {
+                                                                                                                        echo $_SESSION['calcPackage'];
+                                                                                                                    } else {
+                                                                                                                        echo 3;
+                                                                                                                    } ?>" />
+                                                <a href="#" class="qty qty-plus">+</a>
+                                            </div>
 
-                                        <div class="col col-vat col-numeric">
-                                            <p><?php echo $DapurName; ?></p>
-                                        </div>
-                                        <div class="col col-total col-numeric">
-                                            <p id="totalPackage"><?php if (isset($_SESSION['calcTotal'])) {
-                                                                        echo $_SESSION['calcTotal'];
-                                                                    } else {
-                                                                        echo 0;
-                                                                    } ?></p>
-                                        </div>
+                                            <div class="col col-vat col-numeric">
+                                                <p><?php echo $DapurName; ?></p>
+                                            </div>
+                                            <div class="col col-total col-numeric">
+                                                <p id="totalPackage"><?php if (isset($_SESSION['calcTotal'])) {
+                                                                            echo $_SESSION['calcTotal'];
+                                                                        } else {
+                                                                            echo 0;
+                                                                        } ?></p>
+                                            </div>
                                         <?php } ?>
                                     </div>
 

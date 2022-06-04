@@ -17,11 +17,11 @@ if (isset($_POST["loginSubmit"])) {
 
     if (empty($UserUsername)) {
         echo "User Name is required";
-        header("Location: index.php?error=User Name is required");
+        header("Location:index.php?error=User Name is required");
         exit();
     } else if (empty($UserPassword)) {
         echo "Password is required";
-        header("Location: index.php?error=Password is required");
+        header("Location:index.php?error=Password is required");
         exit();
     } else {
 
@@ -34,7 +34,7 @@ if (isset($_POST["loginSubmit"])) {
 
             if ($row['UserUsername'] === $UserUsername && $row['UserPassword'] === $UserPassword) {
 
-                echo "Logged in!";
+                //echo "Logged in!";
                 $_SESSION['UserUsername'] = $row['UserUsername'];
                 $_SESSION['UserID'] = $row['UserID'];
                 $UserID = $row['UserID'];
@@ -42,48 +42,48 @@ if (isset($_POST["loginSubmit"])) {
 
 
                 if ($row['UserAccountType'] == 1) {
-                    echo "Admin";
+                    //echo "Admin";
                     $sqlAdmin = "SELECT * FROM admin WHERE UserID='$UserID'";
                     $resultAdmin = $con->query($sqlAdmin);
                     $rowAdmin = mysqli_fetch_assoc($resultAdmin);
                     $_SESSION['AdminID'] = $rowAdmin['AdminID'];
 
-                    header("Location: admin_dashboard.html");
+                    header("Location:admin_dashboard.php");
                 }
                 if ($row['UserAccountType'] == 2) {
-                    echo "Donor";
+                    //echo "Donor";
                     $sqlDonor = "SELECT * FROM donor WHERE UserID='$UserID'";
                     $resultDonor = $con->query($sqlDonor);
                     $rowDonor = mysqli_fetch_assoc($resultDonor);
                     $_SESSION['DonorID'] = $rowDonor['DonorID'];
-                    header("Location: donor_dashboard.html");
+                    header("Location:donor_dashboard.php");
                 }
                 if ($row['UserAccountType'] == 3) {
-                    echo "Donee";
+                    //echo "Donee";
                     $sqlDonee = "SELECT * FROM donee WHERE UserID='$UserID'";
                     $resultDoneer = $con->query($sqlDonee);
                     $rowDonee = mysqli_fetch_assoc($resultDoneer);
                     $_SESSION['DoneeID'] = $rowDonor['DoneeID'];
-                    header("Location: donee_dashboard.html");
+                    header("Location:donee_dashboard.php");
                 }
                 if ($row['UserAccountType'] == 4) {
-                    echo "Dapur";
+                    //echo "Dapur";
                     $sqlDapur = "SELECT * FROM dapur WHERE UserID='$UserID'";
                     $resultDapur = $con->query($sqlDapur);
                     $rowDapur = mysqli_fetch_assoc($resultDapur);
                     $_SESSION['DapurID'] = $rowDonor['DapurID'];
-                    header("Location: dapur_dashboard.html");
+                    header("Location:dapur_dashboard.php");
                 }
 
                 exit();
             } else {
                 echo "Incorect User name or password";
-                header("Location: index.php?error=Incorect User name or password");
+                header("Location:index.php?error=Incorect User name or password");
                 exit();
             }
         } else {
             echo "Incorect User name or password";
-            header("Location: index.php?error=Incorect User name or password");
+            header("Location:index.php?error=Incorect User name or password");
             exit();
         }
     }
@@ -105,15 +105,15 @@ if (isset($_POST['registerSubmit'])) {
     // by adding (array_push()) corresponding error unto $errors array
     if (empty($username)) {
         array_push($errors, "Username is required");
-        header("Location: register.php?error=Username is required");
+        header("Location:register.php?error=Username is required");
     }
     if (empty($password_1)) {
         array_push($errors, "Password is required");
-        header("Location: register.php?error=Password is required");
+        header("Location:register.php?error=Password is required");
     }
     if ($password_1 != $password_2) {
         array_push($errors, "The two passwords do not match");
-        header("Location: register.php?error=The two passwords do not match");
+        header("Location:register.php?error=The two passwords do not match");
     }
 
     // first check the database to make sure 
@@ -126,7 +126,7 @@ if (isset($_POST['registerSubmit'])) {
         // if user exists
         if ($user['UserUsername'] === $username) {
             array_push($errors, "Username already exists");
-            header("Location: register.php?error=Username already exists");
+            header("Location:register.php?error=Username already exists");
         }
     }
 
@@ -140,7 +140,7 @@ if (isset($_POST['registerSubmit'])) {
         //$_SESSION['UserUsername'] = $row['UserUsername'];    
         //$_SESSION['UserID'] = $row['UserID'];    
         //$_SESSION['UserAccountType'] = $row['UserAccountType']; 
-        header('location: login.php');
+        header('Location:login.php');
     }
 }
 
@@ -154,7 +154,7 @@ if (isset($_POST["requestSubmit"])) {
     $RequestPhone = $_POST["RequestPhone"];
     $PackageID = $_POST["PackageID"];
     $RequestLocation = $_POST["RequestLocation"];
-    $RequestICPic = $_POST["RequestICPic"];
+    //$RequestICPic = $_POST["RequestICPic"];
     $ApprovalID = 0;
     /*echo $RequestName;
         echo $RequestIC;
@@ -164,9 +164,24 @@ if (isset($_POST["requestSubmit"])) {
         echo $RequestICPic;
         echo $ApprovalID;*/
 
-    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$RequestICPic', '$ApprovalID')";
+    //picture
+    //$_FILES['PackageImage']['error'];
+    $filename = $_FILES["RequestICPic"]["name"];
+    $tempname = $_FILES["RequestICPic"]["tmp_name"];
+    $folder = "./image/" . $filename;
 
-    $result = mysqli_query($con, $query);
+    //echo $filename;
+
+    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$filename', '$ApprovalID')";
+
+    $result = mysqli_query($con, $query) or die(mysqli_error($con));
+
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+       echo "<h3>  Failed to upload image!</h3>";
+    }
 
     $con->close();
 
@@ -238,6 +253,7 @@ if (isset($_POST["dapurInfoUpdate"])) {
 //dapur package submit
 if (isset($_POST["dapurPackageSubmit"])) {
 
+
     //echo "Menjadi";
 
     $PackageName = $_POST["PackageName"];
@@ -245,13 +261,28 @@ if (isset($_POST["dapurPackageSubmit"])) {
     $PackageMinOrder = $_POST["PackageMinOrder"];
     $DapurID = 1;    //$_POST["DapurID"];
 
-    $query = "INSERT INTO package(PackageName, PackagePrice, PackageMinOrder, DapurID) VALUES('$PackageName', '$PackagePrice', '$PackageMinOrder', '$DapurID')";
+    //picture
+    //$_FILES['PackageImage']['error'];
+    $filename = $_FILES["PackageImage"]["name"];
+    $tempname = $_FILES["PackageImage"]["tmp_name"];
+    $folder = "./image/" . $filename;
+
+    echo $filename;
+
+    $query = "INSERT INTO package(PackageName, PackagePrice, PackageMinOrder, DapurID, PackageImage) VALUES('$PackageName', '$PackagePrice', '$PackageMinOrder', '$DapurID', '$filename')";
 
     $result = mysqli_query($con, $query);
 
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        echo "<h3>  Failed to upload image!</h3>";
+    }
+
     $con->close();
 
-    header("Location:dapur_packageInfo.php");
+    //header("Location:dapur_packageInfo.php");
 }
 
 //package update
@@ -523,8 +554,8 @@ http://curl.haxx.se/docs/caextract.html
 
         $resultView = $con->query($sqlView);
 
-        if($resultView->num_rows>0){
-            while($rowView = $resultView->fetch_assoc()){
+        if ($resultView->num_rows > 0) {
+            while ($rowView = $resultView->fetch_assoc()) {
                 $unique_txn_id = $rowView["PackageName"];
             }
         }

@@ -74,21 +74,21 @@ window.onload = function() {
 <body>
 
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+            <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
 
@@ -105,7 +105,7 @@ window.onload = function() {
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="#1">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="donor_dashboard">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
                         
                         <li class="menu-hasdropdown">
@@ -117,9 +117,9 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown">
-                                <li><a href="">Donation Package Catalogue</a></li>
-                                <li><a href="">Donee Catalogue</a></li>
-                                <li><a href="">Donation Request Catalogue</a></li>
+                                <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
+                                <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
+                                <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
                             </ul>
                         </li>
 
@@ -132,12 +132,11 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown2">
-                                <li><a href="">All</a></li>
-                                <li><a href="">Pending</a></li>
-                                <li><a href="">Finished</a></li>
+                                <li><a href="donor_recordAll.php">All</a></li>
+                                <li><a href="donor_recordPending.php">Pending</a></li>
+                                <li><a href="donor_recordFinished.php">Finished</a></li>
                             </ul>
-                        </li>
-                        
+                        </li>                        
 
                     </ul>
 

@@ -8,21 +8,21 @@
 <body>
 
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#request">Request</a>
+  <a class="active" href="index.php">Home</a>
+  <a href="request.html">Request</a>
   <div class="dropdown">
     <button class="dropbtn">Catalogue 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Donation Package Catalogue</a>
-      <a href="#">Donee Package Catalogue</a>
-      <a href="#">Donation Request</a>
+    <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
     </div>
   </div> 
   <a href="#about">About</a>
   <div class="topnav-right">
-    <a href="#about">Login</a>
+    <a href="login.php">Login</a>
   </div>
 </div>
 

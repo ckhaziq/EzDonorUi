@@ -11,21 +11,21 @@
 <body>
 
     <div class="topnav">
-        <a href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button style="background-color: #04AA6D;" class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a class="active" href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+            <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
 
@@ -43,7 +43,7 @@
         ?>
         <div class="product">
             <div class="product-img">
-                <img src="">
+                <img src="./image/<?php echo $rowView['DoneeCatalogueImage']; ?>">
             </div>
             <div class="product-content">
                 <h3>Donee Name: <?php echo $rowView["DoneeCatalogueName"]; ?>

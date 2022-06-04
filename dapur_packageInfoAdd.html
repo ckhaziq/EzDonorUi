@@ -28,21 +28,21 @@
 <body>
 
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+                <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
 
@@ -57,54 +57,52 @@
 
                 <div class="overflow-container">
 
-                    <ul class="menu-dropdown">
+                    <li><a href="dapur_dashboard.php">Dashboard</a><span class="icon"><i
+                                class="fa fa-dashboard"></i></span></li>
 
-                        <li><a href="#1">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
+                    <li class="menu-hasdropdown">
+                        <a href="#3">Info</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                        <li class="menu-hasdropdown">
-                            <a href="#3">Info</a><span class="icon"><i class="fa fa-gear"></i></span>
+                        <label title="toggle menu" for="settings">
+                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+                        </label>
+                        <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
-                            <label title="toggle menu" for="settings">
-                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                            </label>
-                            <input type="checkbox" class="sub-menu-checkbox" id="settings" />
+                        <ul class="sub-menu-dropdown">
+                            <li><a href="dapur_restaurantInfo.php">Dapur Info</a></li>
+                            <li><a href="dapur_packageInfo.php">Package Info</a></li>
+                        </ul>
+                    </li>
 
-                            <ul class="sub-menu-dropdown">
-                                <li><a href="">Dapur Info</a></li>
-                                <li><a href="">Package Info</a></li>
-                            </ul>
-                        </li>
+                    <li class="menu-hasdropdown">
+                        <a href="#3">Order</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                        <li class="menu-hasdropdown">
-                            <a href="#3">Order</a><span class="icon"><i class="fa fa-gear"></i></span>
+                        <label title="toggle2 menu2" for="settings">
+                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+                        </label>
+                        <input type="checkbox" class="sub-menu-checkbox2" id="settings" />
 
-                            <label title="toggle2 menu2" for="settings">
-                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                            </label>
-                            <input type="checkbox" class="sub-menu-checkbox2" id="settings" />
+                        <ul class="sub-menu-dropdown2">
+                            <li><a href="dapur_orderAll.php">All Order</a></li>
+                            <li><a href="dapur_orderNew.php">New Order</a></li>
+                            <li><a href="dapur_orderPending.php">Pending</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-hasdropdown">
+                        <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                            <ul class="sub-menu-dropdown2">
-                                <li><a href="">All Order</a></li>
-                                <li><a href="">New Order</a></li>
-                                <li><a href="">Pending Order</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-hasdropdown">
-                            <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
+                        <label title="toggle3 menu3" for="settings">
+                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+                        </label>
+                        <input type="checkbox" class="sub-menu-checkbox3" id="settings" />
 
-                            <label title="toggle3 menu3" for="settings">
-                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                            </label>
-                            <input type="checkbox" class="sub-menu-checkbox3" id="settings" />
-
-                            <ul class="sub-menu-dropdown3">
-                                <li><a href="">All</a></li>
-                                <li><a href="">New</a></li>
-                                <li><a href="">Pending</a></li>
-                                <li><a href="">Finished</a></li>
-                            </ul>
-                        </li>
+                        <ul class="sub-menu-dropdown3">
+                            <li><a href="dapur_recordAll.php">All</a></li>
+                            <li><a href="dapur_recordPending.php">Pending</a></li>
+                            <li><a href="dapur_recordFinish.php">Finished</a></li>
+                        </ul>
+                    </li>
 
                     </ul>
 
@@ -124,8 +122,9 @@
                             <div style="margin: auto;" class="container">
                                 <h1 id="title">Dapur Info Form</h1>
 
-                                <form id="survey-form" action="operation.php" method="POST">
-                                    
+                                <form id="survey-form" action="operation.php" method="POST"
+                                    enctype="multipart/form-data">
+
                                     <div class="inputwrap col">
                                         <label for="name" id="name-label" class="bold">Package Name</label>
                                         <input id="name" name="PackageName" type="text" value="">
@@ -138,9 +137,13 @@
                                         <label for="email" id="email-label" class="bold">Minimun Order</label>
                                         <input id="name" name="PackageMinOrder" type="number" value="">
                                     </div>
+                                    <div style="height: 50px;" class="inputwrap col">
+                                        <label for="email" id="email-label" class="bold">Upload Package Picture</label>
+                                        <input style="height: 60px;" id="name" name="PackageImage" type="file">
+                                    </div>
 
                                     <button name="dapurPackageSubmit" type="submit" id="submit">Submit</button>
-                                    
+
                                 </form>
                             </div>
                         </section>
@@ -315,8 +318,7 @@
         color: white;
     }
 
-    <!--dashboard-->
-    body {
+    < !--dashboard-->body {
         font-family: 'Work Sans', sans-serif;
         margin: 0;
         background-color: #eee;
@@ -1092,108 +1094,108 @@
 
     @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-* {
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    transition: 0.3s;
-}
-
-body {
-    margin: 0;
-}
-
-section {
-    background-image: url("image/light-background-with-calm-soft-colors-spring-shades-color-soft-gradient-backgrounds-posters-banners-postcards-vector-illustration_589396-89.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-    background-position: fixed;
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    background-color: white;
-    height: fit-content;
-    padding: 50px 80px;
-    margin: 50px;
-    width: 100%;
-    max-width: 600px;
-}
-
-h1 {
-    font-family: 'Abril Fatface', cursive;
-    font-size: 3.2rem;
-    margin: 0;
-    text-align: center;
-}
-
-#description {
-    text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-}
-
-.inputwrap {
-    margin: 10px 0;
-}
-
-.col {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.mt8 {
-    margin-top: 8px;
-}
-
-input,
-select {
-    padding: 15px;
-    font-size: 0.9rem;
-}
-
-.bold {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-textarea {
-    width: 100%;
-}
-
-button {
-    margin-top: 50px;
-    padding: 15px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    background-color: black;
-}
-
-button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-}
-
-label:hover,
-input[type="radio"],
-input[type="checkbox"] {
-    cursor: pointer;
-}
-
-@media screen and (max-width: 600px) {
-    h1 {
-        font-size: 2rem;
+    * {
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        transition: 0.3s;
     }
-}
+
+    body {
+        margin: 0;
+    }
+
+    section {
+        background-image: url("image/light-background-with-calm-soft-colors-spring-shades-color-soft-gradient-backgrounds-posters-banners-postcards-vector-illustration_589396-89.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        background-position: fixed;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        background-color: white;
+        height: fit-content;
+        padding: 50px 80px;
+        margin: 50px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', cursive;
+        font-size: 3.2rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    #description {
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .inputwrap {
+        margin: 10px 0;
+    }
+
+    .col {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .mt8 {
+        margin-top: 8px;
+    }
+
+    input,
+    select {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+
+    .bold {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    button {
+        margin-top: 50px;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: white;
+        background-color: black;
+    }
+
+    button:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    label:hover,
+    input[type="radio"],
+    input[type="checkbox"] {
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+        h1 {
+            font-size: 2rem;
+        }
+    }
 </style>
 <script>
     $('.nav-toggle').click(function (e) {

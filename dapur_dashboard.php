@@ -143,21 +143,21 @@ window.onload = function() {
 <body>
 
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+            <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
 
@@ -174,7 +174,7 @@ window.onload = function() {
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="#1">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="dapur_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
                         <li class="menu-hasdropdown">
@@ -186,8 +186,8 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown">
-                                <li><a href="">Dapur Info</a></li>
-                                <li><a href="">Package Info</a></li>
+                                <li><a href="dapur_restaurantInfo.php">Dapur Info</a></li>
+                                <li><a href="dapur_packageInfo.php">Package Info</a></li>
                             </ul>
                         </li>
 
@@ -200,10 +200,9 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox2" id="settings" />
 
                             <ul class="sub-menu-dropdown2">
-                                <li><a href="">All Order</a></li>
-                                <li><a href="">New Order</a></li>
-                                <li><a href="">New</a></li>
-                                <li><a href="">Pending Order</a></li>
+                                <li><a href="dapur_orderAll.php">All Order</a></li>
+                                <li><a href="dapur_orderNew.php">New Order</a></li>
+                                <li><a href="dapur_orderPending.php">Pending</a></li>
                             </ul>
                         </li>
                         <li class="menu-hasdropdown">
@@ -215,9 +214,9 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox3" id="settings" />
 
                             <ul class="sub-menu-dropdown3">
-                                <li><a href="">All</a></li>
-                                <li><a href="">Pending</a></li>
-                                <li><a href="">Finished</a></li>
+                                <li><a href="dapur_recordAll.php">All</a></li>
+                                <li><a href="dapur_recordPending.php">Pending</a></li>
+                                <li><a href="dapur_recordFinish.php">Finished</a></li>
                             </ul>
                         </li>
 

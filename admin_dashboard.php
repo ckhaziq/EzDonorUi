@@ -121,21 +121,21 @@ window.onload = function() {
 <body>
 
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#request">Request</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="request.html">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Donation Package Catalogue</a>
-                <a href="#">Donee Package Catalogue</a>
-                <a href="#">Donation Request</a>
+            <a href="catalogue_package.php">Donation Package Catalogue</a>
+                <a href="catalogue_donee.php">Donee Package Catalogue</a>
+                <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
         <a href="#about">About</a>
         <div class="topnav-right">
-            <a href="#about">Login</a>
+            <a href="login.php">Login</a>
         </div>
     </div>
 
@@ -152,13 +152,13 @@ window.onload = function() {
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="#1">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="admin_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
-                        <li><a href="#2">Request Application</a><span class="icon"><i class="fa fa-heart"></i></span>
+                        <li><a href="admin_requestApplication.php">Request Application</a><span class="icon"><i class="fa fa-heart"></i></span>
                         </li>
 
                         <li class="menu-hasdropdown">
-                            <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
+                            <a href="#admin">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
 
                             <label title="toggle menu" for="settings">
                                 <span class="downarrow"><i class="fa fa-caret-down"></i></span>
@@ -166,9 +166,9 @@ window.onload = function() {
                             <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
                             <ul class="sub-menu-dropdown">
-                                <li><a href="">All/a></li>
-                                <li><a href="">Approved</a></li>
-                                <li><a href="">Rejected</a></li>
+                                <li><a href="admin_recordAll.php">All</a></li>
+                                <li><a href="admin_recordApproved.php">Approved</a></li>
+                                <li><a href="admin_recordDeclined.php">Rejected</a></li>
                             </ul>
                         </li>
 

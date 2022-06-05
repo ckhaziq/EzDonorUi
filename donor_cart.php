@@ -350,9 +350,9 @@ if (isset($_POST["CalcTotalALL"])) {
                                             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
                                             <input name="PackageID" type="text" value="<?php echo $PackageID; ?>" hidden>
                                             <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>" hidden>
-                                            <input name="DapurID" type="text" value="<?php echo $$DapurID; ?>" hidden>
+                                            <input name="DapurID" type="text" value="<?php echo $DapurID; ?>" hidden>
                                             <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>" hidden>
-                                            <input name="item_name" type="text" value="<?php echo $PackageName; ?>" hidden>
+                                            <input name="item_name" type="text" value="<?php echo $PackageName; ?>">
                                             <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
                                             <input name="PaymentMethod" type="text" value="PayPal" hidden>
                                             <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>" hidden>

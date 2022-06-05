@@ -199,15 +199,16 @@ if (isset($_POST["doneeRequestSubmit"])) {
     $PackageID = $_POST["PackageID"];
     $RequestLocation = $_POST["RequestLocation"];
     $RequestICPic = $_POST["RequestICPic"];
+    $RequestMap = "map.png";
     $ApprovalID = 0;
 
-    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$RequestICPic', '$ApprovalID')";
+    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID, RequestMap) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$RequestICPic', '$ApprovalID', '$RequestMap')";
 
     $result = mysqli_query($con, $query);
 
     $con->close();
 
-    header("Location:donee_dashboard.html");
+    header("Location:donee_dashboard.php");
 }
 
 //dapur info form submit

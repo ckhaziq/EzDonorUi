@@ -37,7 +37,7 @@
                 <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
-        <a href="#about">About</a>
+         
         <div class="topnav-right">
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
@@ -123,7 +123,7 @@
                             ?>
                                     <div style="background-color:white;" class="product">
                                         <div class="product-img">
-                                            <img src="./image/<?php echo $rowView['PackageImage']; ?>">
+                                            <img src="./image/<?php echo $rowView['DoneeCatalogueImage']; ?>">
                                         </div>
                                         <div class="product-content">
                                             <h3>Donee Name: <?php echo $rowView["DoneeCatalogueName"]; ?>

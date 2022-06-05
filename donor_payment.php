@@ -34,7 +34,8 @@ $txn_id = $_POST['txn_id'];
 $ReceiverEmail = $_POST['business'];
 $date = date(DATE_ATOM);
 $DonorID = $_SESSION['DonorID'];
-$OrderStatus = "Pending";
+$OrderStatus = "New";
+$PaymentStatus = "Pending";
 
 $_SESSION['PackageID'] = $PackageID;
 $_SESSION['PackagePrice'] = $PackagePrice;
@@ -51,10 +52,10 @@ $_SESSION['DonorID'] = $DonorID;
 $_SESSION['OrderStatus'] = $OrderStatus;
 
 if ((isset($_POST['DoneeID']) && $_POST['DoneeID'] != "")) {
-    $queryOrder = "INSERT INTO ordertable(DonorID, DoneeID, DapurID, PackageID, OrderAmount ,OrderDate, OrderStatus) VALUES('$DonorID', '$DoneeID', '$DapurID', '$PackageID', '$PaymentTotalPrice', '$date', '$OrderStatus')";
+    $queryOrder = "INSERT INTO ordertable(DonorID, DoneeID, DapurID, PackageID, OrderAmount ,OrderDate, OrderStatus, PaymentStatus) VALUES('$DonorID', '$DoneeID', '$DapurID', '$PackageID', '$PaymentTotalPrice', '$date', '$OrderStatus', '$PaymentStatus')";
 }
 if ((isset($_POST['RequestID']) && $_POST['RequestID'] != "")) {
-    $queryOrder = "INSERT INTO ordertable(DonorID, DoneeID, DapurID, PackageID, OrderAmount ,OrderDate, OrderStatus) VALUES('$DonorID', '$RequestID', '$DapurID', '$PackageID', '$PaymentTotalPrice', '$date', '$OrderStatus')";
+    $queryOrder = "INSERT INTO ordertable(DonorID, DoneeID, DapurID, PackageID, OrderAmount ,OrderDate, OrderStatus, PaymentStatus) VALUES('$DonorID', '$RequestID', '$DapurID', '$PackageID', '$PaymentTotalPrice', '$date', '$OrderStatus', '$PaymentStatus')";
 }
 
 

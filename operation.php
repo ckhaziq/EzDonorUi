@@ -155,6 +155,7 @@ if (isset($_POST["requestSubmit"])) {
     $PackageID = $_POST["PackageID"];
     $RequestLocation = $_POST["RequestLocation"];
     //$RequestICPic = $_POST["RequestICPic"];
+    $RequestMap = 'map.png';
     $ApprovalID = 0;
     /*echo $RequestName;
         echo $RequestIC;
@@ -172,7 +173,7 @@ if (isset($_POST["requestSubmit"])) {
 
     //echo $filename;
 
-    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$filename', '$ApprovalID')";
+    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID, RequestMap) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$filename', '$ApprovalID', '$RequestMap')";
 
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 

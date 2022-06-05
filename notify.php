@@ -29,7 +29,7 @@ $OrderID = $_SESSION['OrderID'];
 
 $PaymentStatus = "Paid";
 
-$sqlPayment = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, DapurID, PaymentAmount, item_name, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail, OrderID) VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$DapurID','$PaymentAmount', '$item_name', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail', '$OrderID')";
+$sqlPayment = "INSERT INTO payment(DoneeID, PackageID, PackagePrice, DapurID, PaymentAmount, PaymentTotalPrice, PaymentMethod, Currency, txn_id, PaymentStatus, ReceiverEmail, OrderID) VALUES ('$DoneeID', '$PackageID', '$PackagePrice', '$DapurID','$PaymentAmount', '$PaymentTotalPrice', '$PaymentMethod', '$Currency', '$txn_id', '$PaymentStatus', '$ReceiverEmail', '$OrderID')";
 
 $resultPayment = $con->query($sqlPayment);
 
@@ -47,7 +47,7 @@ $PaymentID = $LastIDP;
 $OrderStatus = 'Paid';
 
 //insert order
-$queryUpdate = "UPDATE ordertable SET PaymentID='$PaymentID', OrderStatus='$OrderStatus''WHERE PaymentID='$PaymentID'";
+$queryUpdate = "UPDATE ordertable SET PaymentID='$PaymentID', PaymentStatus='$OrderStatus' WHERE OrderID='$OrderID'";
 $resultUpdate = mysqli_query($con, $queryUpdate);
 
 $con->close();

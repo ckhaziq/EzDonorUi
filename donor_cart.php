@@ -116,7 +116,7 @@ if (isset($_POST["CalcTotalALL"])) {
                 <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
-        <a href="#about">About</a>
+         
         <div class="topnav-right">
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>

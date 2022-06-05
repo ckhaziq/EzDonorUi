@@ -40,7 +40,7 @@
                 <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
-        <a href="#about">About</a>
+         
         <div class="topnav-right">
             <a class="active" href="login.php">Login</a>
         </div>

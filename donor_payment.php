@@ -81,29 +81,29 @@ $con->close();
             <?php
             if ((isset($_POST['DoneeID']) && $_POST['DoneeID'] != "")) {
             ?>
-                <input name="DoneeID" type="text" value="<?php echo $DoneeID; ?>">
+                <input hidden name="DoneeID" type="text" value="<?php echo $DoneeID; ?>">
             <?php
             }
             if ((isset($_POST['RequestID']) && $_POST['RequestID'] != "")) {
             ?>
-                <input name="RequestID" type="text" value="<?php echo $RequestID; ?>">
+                <input hidden name="RequestID" type="text" value="<?php echo $RequestID; ?>">
             <?php
             }
             ?>
-            <input name="PackageID" type="text" value="<?php echo $PackageID; ?>">
-            <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>">
-            <input name="DapurID" type="text" value="<?php echo $DapurID; ?>">
-            <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>">
-            <input name="item_name" type="text" value="<?php echo $item_name; ?>">
-            <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>">
-            <input name="PaymentMethod" type="text" value="PayPal">
-            <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>">
-            <input name="business" type="text" value="<?php echo PAYPAL_EMAIL; ?>">
-            <input name="OrderID" type="text" value="<?php echo $OrderID; ?>">
+            <input hidden name="PackageID" type="text" value="<?php echo $PackageID; ?>">
+            <input hidden name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>">
+            <input hidden name="DapurID" type="text" value="<?php echo $DapurID; ?>">
+            <input hidden name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>">
+            <input hidden name="item_name" type="text" value="<?php echo $item_name; ?>">
+            <input hidden name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>">
+            <input hidden name="PaymentMethod" type="text" value="PayPal">
+            <input hidden name="currency_code" type="text" value="<?php echo CURRENCY; ?>">
+            <input hidden name="business" type="text" value="<?php echo PAYPAL_EMAIL; ?>">
+            <input hidden name="OrderID" type="text" value="<?php echo $OrderID; ?>">
 
-            <input name="return" type="text" value="<?php echo RETURN_URL; ?>">
-            <input name="cancel_return" type="text" value="<?php echo CANCEL_URL; ?>">
-            <input name="notify_url" type="text" value="<?php echo NOTIFY_URL; ?>">
+            <input hidden name="return" type="text" value="<?php echo RETURN_URL; ?>">
+            <input hidden name="cancel_return" type="text" value="<?php echo CANCEL_URL; ?>">
+            <input hidden name="notify_url" type="text" value="<?php echo NOTIFY_URL; ?>">
 
             <input type="hidden" name="cmd" value="_xclick">
 

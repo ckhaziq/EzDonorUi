@@ -43,9 +43,8 @@
 <footer>
   <p>Author: Hege Refsnes<br>
   <a href="mailto:hege@example.com">hege@example.com</a></p>
-  <a href="donor_cart.php"><button>Donate Now</button></a>
+  <a href="login.php"><button>Donate Now</button></a>
 </footer>
-<a href="donor_cart.php"><button>textsting</button></a>
 
 </body>
 <style>

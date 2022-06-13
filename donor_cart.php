@@ -141,7 +141,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="donor_dashboard">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
                         <li class="menu-hasdropdown">
@@ -336,7 +336,7 @@ if (isset($_POST["CalcTotalALL"])) {
                                     <div style="margin: auto;  width: 130px;  padding: 10px;">
                                         <form action="" method="POST">
                                             <input hidden id="calcPrice" name="calcPrice" type="text" value="0">
-                                            <input hidden id="calcPackage" name="calcPackage" type="text" value="0">
+                                            <input hidden require id="calcPackage" name="calcPackage" type="text" value="0">
                                             <input hidden id="calcTotal" name="calcTotal" type="text" value="0">
                                             <input name="CalcTotalALL" type="submit" value="Total ALL">
                                         </form>
@@ -352,7 +352,7 @@ if (isset($_POST["CalcTotalALL"])) {
                                             <input name="PackagePrice" type="text" value="<?php echo $PackagePrice; ?>" hidden>
                                             <input name="DapurID" type="text" value="<?php echo $DapurID; ?>" hidden>
                                             <input name="PaymentAmount" type="text" value="<?php echo $_SESSION['calcPackage']; ?>" hidden>
-                                            <input name="item_name" type="text" value="<?php echo $PackageName; ?>">
+                                            <input name="item_name" type="text" value="<?php echo $PackageName; ?>" hidden>
                                             <input name="amount" type="text" value="<?php echo $_SESSION['calcTotalALL']; ?>" hidden>
                                             <input name="PaymentMethod" type="text" value="PayPal" hidden>
                                             <input name="currency_code" type="text" value="<?php echo CURRENCY; ?>" hidden>
@@ -364,7 +364,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
                                             <input type="hidden" name="cmd" value="_xclick">
 
-                                            <input name="paymentPayPal" type="submit" value="PayPal Payment">
+                                            <input width="100%" name="paymentPayPal" type="submit" value="Order">
                                         </form>
                                     </div>
                                 </div>

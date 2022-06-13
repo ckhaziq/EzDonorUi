@@ -45,6 +45,34 @@
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
+<?php
+if (isset($_SESSION['AdminID'])) {
+?>
+	<a href="admin_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DoneeID'])) {
+?>
+	<a href="donee_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DonorID'])) {
+?>
+	<a href="donor_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DapurID'])) {
+?>
+	<a href="dapur_dashboard.php">Dashboard</a>
+<?php
+}
+?>
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>

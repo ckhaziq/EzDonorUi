@@ -41,6 +41,34 @@
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
+<?php
+if (isset($_SESSION['AdminID'])) {
+?>
+	<a href="admin_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DoneeID'])) {
+?>
+	<a href="donee_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DonorID'])) {
+?>
+	<a href="donor_dashboard.php">Dashboard</a>
+<?php
+}
+?>
+<?php
+if (isset($_SESSION['DapurID'])) {
+?>
+	<a href="dapur_dashboard.php">Dashboard</a>
+<?php
+}
+?>
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -60,7 +88,7 @@
 
                     <ul class="menu-dropdown">
 
-                        <li><a href="donor_dashboard">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
                         <li class="menu-hasdropdown">
@@ -118,7 +146,7 @@
                         <tbody>
                             <?php
 
-                            $sqlView = "SELECT * FROM orderTable WHERE DonorID = 1 AND OrderStatus = 'Pending'";
+                            $sqlView = "SELECT * FROM ordertable WHERE DonorID = 1 AND OrderStatus = 'Pending'";
 
                             $resultView = $con->query($sqlView);
 

@@ -28,35 +28,39 @@
     //TotalRequest
     $resultTotalOrder = mysqli_query($con, "SELECT COUNT(*) AS TotalOrder FROM ordertable");
 	$num_rowsTotalOrder = mysqli_fetch_assoc($resultTotalOrder);
-    //Approved
-    $resultAccepted = mysqli_query($con, "SELECT COUNT(*) AS TotalAccepted FROM ordertable WHERE OrderStatus='Accepted'");
+    //new
+    $resultNew = mysqli_query($con, "SELECT COUNT(*) AS TotalNew FROM ordertable WHERE OrderStatus='New'");
+	$num_rowsTotalNew = mysqli_fetch_assoc($resultNew);
+    //pending
+    $resultAccepted = mysqli_query($con, "SELECT COUNT(*) AS TotalAccepted FROM ordertable WHERE OrderStatus='Pending'");
 	$num_rowsAccepted = mysqli_fetch_assoc($resultAccepted);
-    //WaitingApproval
+    //total ammount
     $resultTotalAmount = mysqli_query($con, "SELECT SUM(OrderAmount) AS TotalAmount FROM ordertable WHERE DonorID=1");
 	$num_rowsTotalAmount = mysqli_fetch_assoc($resultTotalAmount);
-    //Rejected
+    //finish
     $resultFinished = mysqli_query($con, "SELECT COUNT(*) AS TotalFinished FROM ordertable WHERE OrderStatus='Finished'");
 	$num_rowsFinished = mysqli_fetch_assoc($resultFinished);
 
-    //$TotalTotalRequest100 = $num_rowsTotalRequest['TotalTotalRequest'];
-    //$TotalApproved100 = $num_rowsApproved['TotalApproved'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
-    //$TotalWaitingApproval100 = $num_rowsWaitingApproval['TotalWaitingApproval'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
+    $TotalOrder100 = $num_rowsTotalOrder['TotalOrder'];
+    $TotalNew100 = $num_rowsTotalNew['TotalNew'] / $num_rowsTotalOrder['TotalOrder'] * 100;
+    $TotalAccepted100 = $num_rowsAccepted['TotalAccepted'] / $num_rowsTotalOrder['TotalOrder'] * 100;
+    $TotalFinished100 = $num_rowsFinished['TotalFinished'] / $num_rowsTotalOrder['TotalOrder'] * 100;
     //$TotalRejected100 = $num_rowsRejected['TotalRejected'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
     
     $dataPointsRequest = array( 
-        array("label"=>"Approved", "y"=>$TotalApproved100),
-        array("label"=>"Waiting Approval", "y"=>$TotalWaitingApproval100),
-        array("label"=>"Rejected", "y"=>$TotalRejected100)
+        array("label"=>"New", "y"=> $TotalNew100),
+        array("label"=>"Accepted", "y"=> $TotalAccepted100),
+        array("label"=>"Finished", "y"=> $TotalFinished100)
     );    
 ?>
 
 <script>
 window.onload = function() {
-    //request
-    var chart1 = new CanvasJS.Chart("chartContainer1", {
+    //order
+    var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         title: {
-            text: "The number of request of EZDonor"
+            text: "Total Order"
         },
         subtitles: [{
             text: ""
@@ -68,6 +72,8 @@ window.onload = function() {
             dataPoints: <?php echo json_encode($dataPointsRequest, JSON_NUMERIC_CHECK); ?>
         }]
     });
+
+    chart.render();
 }
 </script>
 
@@ -76,7 +82,7 @@ window.onload = function() {
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -92,34 +98,7 @@ window.onload = function() {
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -140,6 +119,8 @@ if (isset($_SESSION['DapurID'])) {
                     <ul class="menu-dropdown">
 
                         <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+
+                        <li><a href="donor_info.php">Info</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
                         
                         <li class="menu-hasdropdown">
@@ -203,6 +184,23 @@ if (isset($_SESSION['DapurID'])) {
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="span3">
+                                    <div style="border-radius: 10px; margin: 10px;" class="widget navy-bg">
+                                        <div class="row-fluid">
+                                            <div class="span4">
+                                                <i class="icon icon-search icon-white"></i>
+                                            </div>
+                                            <div class="span8 text-right">
+                                                <span>New</span>
+                                                <h2 class="font-bold">
+                                                    <?php echo $num_rowsTotalNew['TotalNew']; ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="span3">
                                     <div style="border-radius: 10px; margin: 10px;" class="widget navy-bg">
                                         <div class="row-fluid">
@@ -218,21 +216,7 @@ if (isset($_SESSION['DapurID'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="span3">
-                                    <div style="border-radius: 10px; margin: 10px;" class="widget navy-bg">
-                                        <div class="row-fluid">
-                                            <div class="span4">
-                                                <i class="icon icon-search icon-white"></i>
-                                            </div>
-                                            <div class="span8 text-right">
-                                                <span>Total Amount</span>
-                                                <h2 class="font-bold">
-                                                    <?php echo $num_rowsTotalAmount['TotalAmount']; ?>
-                                                </h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="span3">
                                     <div style="border-radius: 10px; margin: 10px;" class="widget navy-bg">
                                         <div class="row-fluid">
@@ -248,6 +232,21 @@ if (isset($_SESSION['DapurID'])) {
                                         </div>
                                     </div>
                                 </div>
+                                <div class="span3">
+                                    <div style="border-radius: 10px; margin: 10px;" class="widget navy-bg">
+                                        <div class="row-fluid">
+                                            <div class="span4">
+                                                <i class="icon icon-search icon-white"></i>
+                                            </div>
+                                            <div class="span8 text-right">
+                                                <span>Total Amount</span>
+                                                <h2 class="font-bold">
+                                                    RM <?php echo $num_rowsTotalAmount['TotalAmount']; ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -258,20 +257,10 @@ if (isset($_SESSION['DapurID'])) {
                             <div class="col">
                                 <div class="square-card">
                                     <div class="card-title">
-                                        <h4>User</h4>
+                                        <h4>Order</h4>
                                     </div>
                                     <div class="cta">
-                                        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="square-card">
-                                    <div class="card-title">
-                                        <h4>Request</h4>
-                                    </div>
-                                    <div class="cta">
-                                        <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+                                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                                     </div>
                                 </div>
                             </div>

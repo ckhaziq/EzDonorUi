@@ -26,7 +26,7 @@
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -37,39 +37,13 @@
                 <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
-         
+
         <div class="topnav-right">
             <?php if (isset($_SESSION['UserID'])) {
-                //echo $_SESSION['AdminID'] ?>
+                //echo $_SESSION['AdminID'] 
+            ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -155,6 +129,7 @@ if (isset($_SESSION['DapurID'])) {
                                     <th scope="col">Package</th>
                                     <th scope="col">Order Amount</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Proof of Delivery</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -162,7 +137,9 @@ if (isset($_SESSION['DapurID'])) {
                             <tbody>
                                 <?php
 
-                                $sqlView = "SELECT * FROM ordertable WHERE DapurID = 1 AND OrderStatus='Pending'";
+                                $DapurID = $_SESSION['DapurID'];
+
+                                $sqlView = "SELECT * FROM ordertable WHERE DapurID = $DapurID AND OrderStatus='Pending'";
 
                                 $resultView = $con->query($sqlView);
 
@@ -176,17 +153,23 @@ if (isset($_SESSION['DapurID'])) {
                                             <td><?php echo $rowView["PackageID"]; ?></td>
                                             <td><?php echo $rowView["OrderAmount"]; ?></td>
                                             <td><?php echo $rowView["OrderStatus"]; ?></td>
-                                            <td>
-                                                <form action="operation.php" method="POST">
+                                            <form action="operation.php" method="POST" enctype="multipart/form-data">
+                                                <td><input style="height: 100%;" name="OrderProofOfDelivery" type="file" value="Proof of Delivery"></td>
+                                                <td>
                                                     <input name="OrderID" type="text" value="<?php echo $rowView["OrderID"]; ?>" hidden>
+
                                                     <input name="OrderFinished" type="submit" value="Finish">
-                                                </form>
+                                            </form>
                                             </td>
                                         </tr>
                                 <?php
                                     }
-                                }
-                                ?>
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="7">No Data</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

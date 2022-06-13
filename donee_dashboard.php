@@ -31,7 +31,7 @@
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -47,34 +47,7 @@
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -130,7 +103,7 @@ if (isset($_SESSION['DapurID'])) {
                                     Please Fill The Form To Make Request
                                 </p>
 
-                                <form id="survey-form" action="operation.php" method="POST">
+                                <form id="survey-form" action="operation.php" method="POST" enctype="multipart/form-data">
                                     <div class="inputwrap col">
                                         <label for="name" id="name-label" class="bold">Name</label>
                                         <input name="RequestName" type="text" id="name" required
@@ -148,18 +121,30 @@ if (isset($_SESSION['DapurID'])) {
                                     </div>
                                     <div class="inputwrap col">
                                         <label for="email" id="email-label" class="bold">Request Package</label>
-                                        <input name="PackageID" type="number" id="number" min="1" required
-                                            placeholder="Enter your Requested Package" />
+                                        <select style="isolation: isolate; height: 100%; padding:0px;font-size: 15px;" name="PackageID">
+                                        <?php
+                                            //display package
+                                            $sqlpackage = "SELECT * from package";
+
+                                            $resultPackage = $con->query($sqlpackage) or die(mysqli_error($con));
+
+                                            if($resultPackage->num_rows>0){
+                                                while($num_rows = $resultPackage->fetch_assoc()){
+                                                    echo "<option value='".$num_rows["PackageID"]."'>".$num_rows["PackageID"]."</option>";
+                                                }
+                                            }
+                                        ?>
+                                        </select>
                                     </div>
-                                    <div class="inputwrap col">
+                                    <div  class="inputwrap col">
                                         <label for="name" id="name-label" class="bold">MyKad Picture</label>
-                                        <input name="RequestICPic" type="text" id="name" required
+                                        <input style="height: 100%;" name="RequestICPic" type="file" id="name" required
                                             placeholder="Upload your Name MyKad" />
                                     </div>
                                     <div class="inputwrap col">
                                         <label for="name" id="name-label" class="bold">Location</label>
                                         <input name="RequestLocation" type="text" id="name" required
-                                            placeholder="Enter your Phone Number" />
+                                            placeholder="Enter your location" />
                                     </div>
 
                                     <button name="doneeRequestSubmit" type="submit" id="submit">Submit</button>

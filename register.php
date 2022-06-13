@@ -29,7 +29,7 @@
 
     <div class="topnav">
         <a href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -65,7 +65,7 @@
                 <div>
                     <label for="text">Account Type</label>
                     <select name="registerAccountType">
-                        <option value="1">Admin</option>
+                        <!--<option hidden value="1">Admin</option>-->
                         <option value="2">Donor</option>
                         <option value="3">Donee</option>
                         <option value="4">Dapur</option>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div>
-                    <input class="button" type="submit" name="registerSubmit" value="Log In">
+                    <input class="button" type="submit" name="registerSubmit" value="Register">
                 </div>
 
             </form>

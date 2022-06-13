@@ -26,7 +26,7 @@
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -42,34 +42,7 @@
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -154,7 +127,9 @@ if (isset($_SESSION['DapurID'])) {
                                 <form id="survey-form" action="operation.php" method="POST">
                                     <?php
 
-                                    $UserID = 4; //$_SSESION['UserID'];
+                                    $UserID = $_SESSION['UserID'];
+
+                                    //echo $UserID;
 
                                     $sqlView = "SELECT * FROM dapur WHERE UserID = '$UserID'";
 
@@ -180,9 +155,23 @@ if (isset($_SESSION['DapurID'])) {
                                                 <label for="email" id="email-label" class="bold">Delivery Hours</label>
                                                 <input id="name" name="DapurDeliveryHours" type="text" value="<?php echo $rowView["DapurDeliveryHours"]; ?>">
                                             </div>
+                                            <?php
+                                                $sqlView2 = "SELECT * FROM dapur WHERE UserID = '$UserID'";
+                                                $resultView = $con->query($sqlView);
 
-                                            <button name="dapurInfoSubmit" type="submit" id="submit">Submit</button>
+                                                if ($resultView->num_rows > 0) {
+                                                    while ($rowView = $resultView->fetch_assoc()) {
+                                            ?>
                                             <button name="dapurInfoUpdate" type="submit" id="submit">Update</button>
+                                            <?php
+                                                
+                                                    }
+                                                }else{
+                                            ?>
+                                            <button name="dapurInfoSubmit" type="submit" id="submit">Submit</button>                                            
+                                            <?php
+                                                }
+                                            ?>
                                     <?php
                                         }
                                     }

@@ -8,23 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel='stylesheet'>
     <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
-        </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel='stylesheet'
-        type='text/css'>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
-        rel="stylesheet" integrity="sha384-AfZ+8dl93QPpFmy0Q1kFwfwG1NBplh51QAw7oZCXARa9KWcl9Xx/7vk16PCDna/T"
-        crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet" integrity="sha384-AfZ+8dl93QPpFmy0Q1kFwfwG1NBplh51QAw7oZCXARa9KWcl9Xx/7vk16PCDna/T" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!╌Chart╌>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</head>
+        <?php
 
-<?php
-        
-?>
+        ?>
+</head>
 
 <body>
 
@@ -41,10 +36,11 @@
                 <a href="catalogue_request.php">Donation Request</a>
             </div>
         </div>
-         
+
         <div class="topnav-right">
             <?php if (isset($_SESSION['UserID'])) {
-                //echo $_SESSION['AdminID'] ?>
+                //echo $_SESSION['AdminID'] 
+            ?>
                 <a href="logout.php">Log Out</a>
 
             <?php } else { ?>
@@ -64,52 +60,42 @@
 
                 <div class="overflow-container">
 
-                    <li><a href="dapur_dashboard.php">Dashboard</a><span class="icon"><i
-                                class="fa fa-dashboard"></i></span></li>
+                    <ul class="menu-dropdown">
+
+                        <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+
+                        <li><a href="donor_info.php">Info</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
-                    <li class="menu-hasdropdown">
-                        <a href="#3">Info</a><span class="icon"><i class="fa fa-gear"></i></span>
+                        <li class="menu-hasdropdown">
+                            <a href="#3">Catalogue</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                        <label title="toggle menu" for="settings">
-                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                        </label>
-                        <input type="checkbox" class="sub-menu-checkbox" id="settings" />
+                            <label title="toggle menu" for="settings">
+                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+                            </label>
+                            <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
-                        <ul class="sub-menu-dropdown">
-                            <li><a href="dapur_restaurantInfo.php">Dapur Info</a></li>
-                            <li><a href="dapur_packageInfo.php">Package Info</a></li>
-                        </ul>
-                    </li>
+                            <ul class="sub-menu-dropdown">
+                                <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
+                                <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
+                                <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
+                            </ul>
+                        </li>
 
-                    <li class="menu-hasdropdown">
-                        <a href="#3">Order</a><span class="icon"><i class="fa fa-gear"></i></span>
+                        <li class="menu-hasdropdown">
+                            <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                        <label title="toggle2 menu2" for="settings">
-                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                        </label>
-                        <input type="checkbox" class="sub-menu-checkbox2" id="settings" />
+                            <label title="toggle menu" for="settings">
+                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+                            </label>
+                            <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
-                        <ul class="sub-menu-dropdown2">
-                            <li><a href="dapur_orderAll.php">All Order</a></li>
-                            <li><a href="dapur_orderNew.php">New Order</a></li>
-                            <li><a href="dapur_orderPending.php">Pending</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-hasdropdown">
-                        <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
-
-                        <label title="toggle3 menu3" for="settings">
-                            <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                        </label>
-                        <input type="checkbox" class="sub-menu-checkbox3" id="settings" />
-
-                        <ul class="sub-menu-dropdown3">
-                            <li><a href="dapur_recordAll.php">All</a></li>
-                            <li><a href="dapur_recordPending.php">Pending</a></li>
-                            <li><a href="dapur_recordFinish.php">Finished</a></li>
-                        </ul>
-                    </li>
+                            <ul class="sub-menu-dropdown2">
+                                <li><a href="donor_recordAll.php">All</a></li>
+                                <li><a href="donor_recordPending.php">Pending</a></li>
+                                <li><a href="donor_recordFinished.php">Finished</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
 
@@ -120,37 +106,66 @@
         </div>
 
         <div class="new-wrapper">
-
             <div id="main">
 
                 <div style="width: 100%; background-color: grey; margin-top: 13px;" id="main-contents">
-                    <div style="margin: auto;  width: 60%;  padding: 10px;">
+                    <div style="margin: auto;  width: 100%;  padding: 10px;">
                         <section>
                             <div style="margin: auto;" class="container">
-                                <h1 id="title">Dapur Info Form</h1>
+                                <h1 id="title">Donor Info Form</h1>
 
-                                <form id="survey-form" action="operation.php" method="POST"
-                                    enctype="multipart/form-data">
+                                <form id="survey-form" action="operation.php" method="POST">
+                                    <?php
 
-                                    <div class="inputwrap col">
-                                        <label for="name" id="name-label" class="bold">Package Name</label>
-                                        <input id="name" name="PackageName" type="text" value="">
-                                    </div>
-                                    <div class="inputwrap col">
-                                        <label for="name" id="name-label" class="bold">Price per Serving</label>
-                                        <input id="name" name="PackagePrice" type="number" value="">
-                                    </div>
-                                    <div class="inputwrap col">
-                                        <label for="email" id="email-label" class="bold">Minimun Order</label>
-                                        <input id="name" name="PackageMinOrder" type="number" value="">
-                                    </div>
-                                    <div style="height: 50px;" class="inputwrap col">
-                                        <label for="email" id="email-label" class="bold">Upload Package Picture</label>
-                                        <input style="height: 60px;" id="name" name="PackageImage" type="file">
-                                    </div>
+                                    $UserID = $_SESSION['UserID'];
 
-                                    <button name="dapurPackageSubmit" type="submit" id="submit">Submit</button>
+                                    //echo $UserID;
 
+                                    $sqlView = "SELECT * FROM donor WHERE UserID = '$UserID'";
+
+                                    $resultView = $con->query($sqlView);
+
+                                    if ($resultView->num_rows > 0) {
+                                        while ($rowView = $resultView->fetch_assoc()) {
+
+                                    ?>
+                                            <div class="inputwrap col">
+                                                <label for="name" id="name-label" class="bold">Restaurant name</label>
+                                                <input id="name" name="DonorName" type="text" value="<?php echo $rowView["DonorName"]; ?>">
+                                            </div>
+                                            <div class="inputwrap col">
+                                                <label for="name" id="name-label" class="bold">Location</label>
+                                                <input id="name" name="DonorIC" type="text" value="<?php echo $rowView["DonorIC"]; ?>">
+                                            </div>
+                                            <div class="inputwrap col">
+                                                <label for="name" id="name-label" class="bold">Location</label>
+                                                <input id="name" name="DonorPhone" type="text" value="<?php echo $rowView["DonorPhone"]; ?>">
+                                            </div>
+                                            <div class="inputwrap col">
+                                                <label for="name" id="name-label" class="bold">Location</label>
+                                                <input id="name" name="DonorEmail" type="text" value="<?php echo $rowView["DonorEmail"]; ?>">
+                                            </div>
+                                            <?php
+                                            $sqlView2 = "SELECT * FROM donor WHERE UserID = '$UserID'";
+                                            $resultView = $con->query($sqlView);
+
+                                            if ($resultView->num_rows > 0) {
+                                                while ($rowView = $resultView->fetch_assoc()) {
+                                            ?>
+                                                    <button name="donorInfoUpdate" type="submit" id="submit">Update</button>
+                                                <?php
+
+                                                }
+                                            } else {
+                                                ?>
+                                                <button name="donorInfoSubmit" type="submit" id="submit">Submit</button>
+                                            <?php
+                                            }
+                                            ?>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </form>
                             </div>
                         </section>
@@ -325,7 +340,8 @@
         color: white;
     }
 
-    < !--dashboard-->body {
+    //dashboard
+    body {
         font-family: 'Work Sans', sans-serif;
         margin: 0;
         background-color: #eee;
@@ -407,24 +423,6 @@
     }
 
     .openNav .hamburger:before {
-        content: "\2715";
-        /* close icon */
-        display: block;
-        color: #000;
-        line-height: 32px;
-        font-size: 16px;
-    }
-
-    .openNav2 .hamburger:before {
-        content: "\2715";
-        /* close icon */
-        display: block;
-        color: #000;
-        line-height: 32px;
-        font-size: 16px;
-    }
-
-    .openNav3 .hamburger:before {
         content: "\2715";
         /* close icon */
         display: block;
@@ -524,33 +522,7 @@
         animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
     }
 
-    #menu2:checked+ul.menu-dropdown2 {
-
-        left: 0;
-        -webkit-animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
-        animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    #menu3:checked+ul.menu-dropdown3 {
-
-        left: 0;
-        -webkit-animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
-        animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
     .sub-menu-checkbox:checked+ul.sub-menu-dropdown {
-        display: block !important;
-        -webkit-animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
-        animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .sub-menu-checkbox:checked+ul.sub-menu-dropdown2 {
-        display: block !important;
-        -webkit-animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
-        animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .sub-menu-checkbox:checked+ul.sub-menu-dropdown3 {
         display: block !important;
         -webkit-animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
         animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
@@ -558,20 +530,6 @@
 
 
     .openNav .new-wrapper {
-        position: absolute;
-        transform: translate3d(200px, 0, 0);
-        width: calc(100% - 250px);
-        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .openNav2 .new-wrapper {
-        position: absolute;
-        transform: translate3d(200px, 0, 0);
-        width: calc(100% - 250px);
-        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .openNav3 .new-wrapper {
         position: absolute;
         transform: translate3d(200px, 0, 0);
         width: calc(100% - 250px);
@@ -596,28 +554,6 @@
     }
 
     .menu {
-        position: absolute;
-        display: block;
-        left: -200px;
-        top: 0;
-        width: 250px;
-        transition: all 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-        background-color: #000;
-        z-index: 999;
-    }
-
-    .menu2 {
-        position: absolute;
-        display: block;
-        left: -200px;
-        top: 0;
-        width: 250px;
-        transition: all 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-        background-color: #000;
-        z-index: 999;
-    }
-
-    .menu3 {
         position: absolute;
         display: block;
         left: -200px;
@@ -676,47 +612,11 @@
     .openNav .menu:hover {
         position: absolute;
         left: -200px;
-        top: 73px;
-    }
-
-    .openNav2 .menu2:hover {
-        position: absolute;
-        left: -200px;
-        top: 73px;
-    }
-
-    .openNav3 .menu3:hover {
-        position: absolute;
-        left: -200px;
-        top: 73px;
+        top 73px;
     }
 
     .openNav .menu {
-        top: 73px;
-        transform: translate3d(200px, 0, 0);
-        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .openNav2 .menu2:hover {
-        position: absolute;
-        left: -200px;
-        top: 73px;
-    }
-
-    .openNav2 .menu2 {
-        top: 73px;
-        transform: translate3d(200px, 0, 0);
-        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .openNav3 .menu3:hover {
-        position: absolute;
-        left: -200px;
-        top: 73px;
-    }
-
-    .openNav3 .menu3 {
-        top: 73px;
+        top 73px;
         transform: translate3d(200px, 0, 0);
         transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
     }
@@ -724,17 +624,6 @@
     /* label.hamburger {
 		display: none;
 	} */
-
-
-
-
-
-
-
-
-
-
-
 
 
     /* look and feel only, not needed for core menu*/
@@ -775,15 +664,6 @@
 
     }
 
-
-
-
-
-
-
-
-
-
     /* Text meant only for screen readers. */
 
     .screen-reader-text {
@@ -815,14 +695,6 @@
         z-index: 100000;
         /* Above WP toolbar. */
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -1099,6 +971,97 @@
 
     }
 
+    //table 
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    table caption {
+        font-size: 1.5em;
+        margin: .5em 0 .75em;
+    }
+
+    table tr {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: .35em;
+        font-size: 20px;
+    }
+
+    table th,
+    table td {
+        padding: .625em;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    table th {
+        font-size: .85em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        font-size: 25px;
+    }
+
+    @media screen and (max-width: 600px) {
+        table {
+            border: 0;
+        }
+
+        table caption {
+            font-size: 1.3em;
+        }
+
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+        }
+
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+
+        table td::before {
+            /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        table td:last-child {
+            border-bottom: 0;
+        }
+    }
+
+
+
+
+
+
+
     @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
     * {
@@ -1205,25 +1168,11 @@
     }
 </style>
 <script>
-    $('.nav-toggle').click(function (e) {
+    $('.nav-toggle').click(function(e) {
 
         e.preventDefault();
         $("html").toggleClass("openNav");
         $(".nav-toggle").toggleClass("active");
-
-    });
-    $('.nav-toggle2').click(function (f) {
-
-        f.preventDefault();
-        $("html").toggleClass("openNav2");
-        $(".nav-toggle2").toggleClass("active");
-
-    });
-    $('.nav-toggle3').click(function (g) {
-
-        g.preventDefault();
-        $("html").toggleClass("openNav3");
-        $(".nav-toggle3").toggleClass("active");
 
     });
 </script>

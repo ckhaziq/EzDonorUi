@@ -25,7 +25,7 @@
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -41,34 +41,7 @@
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -86,77 +59,44 @@ if (isset($_SESSION['DapurID'])) {
 
                 <div class="overflow-container">
 
-                    <ul class="menu-dropdown">
+                <ul class="menu-dropdown">
 
-                        <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+<li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
-
-                        <li class="menu-hasdropdown">
-                            <a href="#3">Catalogue</a><span class="icon"><i class="fa fa-gear"></i></span>
-
-                            <label title="toggle menu" for="settings">
-                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                            </label>
-                            <input type="checkbox" class="sub-menu-checkbox" id="settings" />
-
-                            <ul class="sub-menu-dropdown">
-                                <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
-                                <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
-                                <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="menu-hasdropdown">
-                            <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
-
-                            <label title="toggle menu" for="settings">
-                                <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                            </label>
-                            <input type="checkbox" class="sub-menu-checkbox" id="settings" />
-
-                            <ul class="sub-menu-dropdown2">
-                                <li><a href="donor_recordAll.php">All</a></li>
-                                <li><a href="donor_recordPendi<ul class=" menu-dropdown">
-
-                                <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+                        <li><a href="donor_info.php">Info</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
-                                <li class="menu-hasdropdown">
-                                    <a href="#3">Catalogue</a><span class="icon"><i class="fa fa-gear"></i></span>
+<li class="menu-hasdropdown">
+    <a href="#3">Catalogue</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                                    <label title="toggle menu" for="settings">
-                                        <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                                    </label>
-                                    <input type="checkbox" class="sub-menu-checkbox" id="settings" />
+    <label title="toggle menu" for="settings">
+        <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+    </label>
+    <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
-                                    <ul class="sub-menu-dropdown">
-                                        <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
-                                        <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
-                                        <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
-                                    </ul>
-                                </li>
+    <ul class="sub-menu-dropdown">
+        <li><a href="donor_catalogue_package.php">Donation Package Catalogue</a></li>
+        <li><a href="donor_catalogue_donee.php">Donee Catalogue</a></li>
+        <li><a href="donor_catalogue_request.php">Donation Request Catalogue</a></li>
+    </ul>
+</li>
 
-                                <li class="menu-hasdropdown">
-                                    <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
+<li class="menu-hasdropdown">
+    <a href="#3">History/Records</a><span class="icon"><i class="fa fa-gear"></i></span>
 
-                                    <label title="toggle menu" for="settings">
-                                        <span class="downarrow"><i class="fa fa-caret-down"></i></span>
-                                    </label>
-                                    <input type="checkbox" class="sub-menu-checkbox" id="settings" />
+    <label title="toggle menu" for="settings">
+        <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+    </label>
+    <input type="checkbox" class="sub-menu-checkbox" id="settings" />
 
-                                    <ul class="sub-menu-dropdown2">
-                                        <li><a href="donor_recordAll.php">All</a></li>
-                                        <li><a href="donor_recordPending.php">Pending</a></li>
-                                        <li><a href="donor_recordFinished.php">Finished</a></li>
-                                    </ul>
-                                </li>
+    <ul class="sub-menu-dropdown2">
+        <li><a href="donor_recordAll.php">All</a></li>
+        <li><a href="donor_recordPending.php">Pending</a></li>
+        <li><a href="donor_recordFinished.php">Finished</a></li>
+    </ul>
+</li>
 
-                            </ul>
-                        </li>
-                    </ul>
-                    </li>
-
-                    </ul>
+</ul>
 
                 </div>
 
@@ -181,7 +121,9 @@ if (isset($_SESSION['DapurID'])) {
                         <tbody>
                             <?php
 
-                            $sqlViewOrder = "SELECT * FROM ordertable WHERE DonorID = 1";
+                            $DonorID = $_SESSION['DonorID'];
+
+                            $sqlViewOrder = "SELECT * FROM ordertable WHERE DonorID = $DonorID";
 
                             $resultView = $con->query($sqlViewOrder) or die(mysqli_error($con));
 
@@ -198,8 +140,12 @@ if (isset($_SESSION['DapurID'])) {
                                     </tr>
                             <?php
                                 }
-                            }
-                            ?>
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="7">No Data</td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

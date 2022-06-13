@@ -63,7 +63,7 @@ if (isset($_POST["loginSubmit"])) {
                     $sqlDonee = "SELECT * FROM donee WHERE UserID='$UserID'";
                     $resultDoneer = $con->query($sqlDonee);
                     $rowDonee = mysqli_fetch_assoc($resultDoneer);
-                    $_SESSION['DoneeID'] = $rowDonor['DoneeID'];
+                    $_SESSION['DoneeID'] = $rowDonee['DoneeID'];
                     header("Location:donee_dashboard.php");
                 }
                 if ($row['UserAccountType'] == 4) {
@@ -71,7 +71,7 @@ if (isset($_POST["loginSubmit"])) {
                     $sqlDapur = "SELECT * FROM dapur WHERE UserID='$UserID'";
                     $resultDapur = $con->query($sqlDapur);
                     $rowDapur = mysqli_fetch_assoc($resultDapur);
-                    $_SESSION['DapurID'] = $rowDonor['DapurID'];
+                    $_SESSION['DapurID'] = $rowDapur['DapurID'];
                     header("Location:dapur_dashboard.php");
                 }
 
@@ -178,14 +178,14 @@ if (isset($_POST["requestSubmit"])) {
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
     // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname,$folder)) {
+    if (move_uploaded_file($tempname, $folder)) {
         //echo "<h3>  Image uploaded successfully!</h3>";
     } else {
-       //echo "<h3>  Failed to upload image!</h3>";
+        //echo "<h3>  Failed to upload image!</h3>";
     }
 
     $con->close();
-    header("Location:request.html");
+    header("Location:request.php");
 }
 
 //donee request form submit
@@ -198,13 +198,27 @@ if (isset($_POST["doneeRequestSubmit"])) {
     $RequestPhone = $_POST["RequestPhone"];
     $PackageID = $_POST["PackageID"];
     $RequestLocation = $_POST["RequestLocation"];
-    $RequestICPic = $_POST["RequestICPic"];
+    //$RequestICPic = $_POST["RequestICPic"];
     $RequestMap = "map.png";
     $ApprovalID = 0;
 
-    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID, RequestMap) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$RequestICPic', '$ApprovalID', '$RequestMap')";
+    //picture
+    //$_FILES['PackageImage']['error'];
+    $filename = $_FILES["RequestICPic"]["name"];
+    $tempname = $_FILES["RequestICPic"]["tmp_name"];
+    $folder = "./image/" . $filename;
+
+    $query = "INSERT INTO request(RequestName, RequestIC, RequestPhone, PackageID , RequestLocation, RequestICPic, ApprovalID, RequestMap) VALUES('$RequestName', '$RequestIC', '$RequestPhone', '$PackageID' , '$RequestLocation', '$filename', '$ApprovalID', '$RequestMap')";
 
     $result = mysqli_query($con, $query);
+
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        //echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        //echo "<h3>  Failed to upload image!</h3>";
+    }
+
 
     $con->close();
 
@@ -221,7 +235,7 @@ if (isset($_POST["dapurInfoSubmit"])) {
     $DapurLocation = $_POST["DapurLocation"];
     $DapurDescription = $_POST["DapurDescription"];
     $DapurDeliveryHours = $_POST["DapurDeliveryHours"];
-    $UserID = 4;    //$_POST["DapurDeliveryHours"];
+    $UserID = $_SESSION['UserID'];
 
     $query = "INSERT INTO dapur(DapurName, DapurLocation, DapurDescription, DapurDeliveryHours , UserID) VALUES('$DapurName', '$DapurLocation', '$DapurDescription', '$DapurDeliveryHours' , '$UserID')";
 
@@ -240,7 +254,7 @@ if (isset($_POST["dapurInfoUpdate"])) {
     $DapurLocation = $_POST["DapurLocation"];
     $DapurDescription = $_POST["DapurDescription"];
     $DapurDeliveryHours = $_POST["DapurDeliveryHours"];
-    $UserID = 4;    //$_POST["UserID"];
+    $UserID = $_SESSION['UserID'];
 
     $query = "UPDATE dapur SET DapurName='$DapurName', DapurLocation='$DapurLocation', DapurDescription='$DapurDescription', DapurDeliveryHours='$DapurDeliveryHours'WHERE UserID='$UserID'";
 
@@ -260,7 +274,7 @@ if (isset($_POST["dapurPackageSubmit"])) {
     $PackageName = $_POST["PackageName"];
     $PackagePrice = $_POST["PackagePrice"];
     $PackageMinOrder = $_POST["PackageMinOrder"];
-    $DapurID = 1;    //$_POST["DapurID"];
+    $DapurID = $_SESSION['DapurID'];    //$_sess["DapurID"];
 
     //picture
     //$_FILES['PackageImage']['error'];
@@ -330,6 +344,33 @@ if (isset($_POST["OrderAccept"])) {
 
     $result = mysqli_query($con, $query);
 
+    //fetch donor id
+    $sqlDonorID =  "SELECT * FROM ordertable WHERE OrderID = '$OrderID'";
+    $resultDonorID = mysqli_query($con, $sqlDonorID);
+    $rowID = mysqli_fetch_assoc($resultDonorID);
+    $DonorID = $rowID['DonorID'];
+
+    $OrderAmount = $rowID['OrderAmount'];
+
+    //fetch donor email
+    $sqlDonorEmail =  "SELECT * FROM donor WHERE DonorID = '$DonorID'";
+    $resultDonorEmail = mysqli_query($con, $sqlDonorEmail);
+    $rowEmail = mysqli_fetch_assoc($resultDonorEmail);
+    $DonorEmail = $rowEmail['DonorEmail'];
+
+    $to = $DonorEmail;
+    $subject = "Your Order";
+    $txt = '<html><body>';
+    $txt .= '<h1 style="color:#f40;">You order have being accepted by Dapur!</h1>';
+    $txt .= '<p style="color:#080;font-size:18px;">Order ID: ' . $OrderID . '</p>';
+    $txt .= '<p style="color:#080;font-size:18px;">Order Ammount: ' . $OrderAmount . '</p>';
+    $txt .= '</body></html>';
+    $headers = "From: ezdonor1@ez-donor.com" . "\r\n" . "CC: ezdonor1@ez-donor.com";
+    $headers  .= 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    mail($to, $subject, $txt, $headers);
+
     $con->close();
 
     header("Location:dapur_orderNew.php");
@@ -341,9 +382,50 @@ if (isset($_POST["OrderFinished"])) {
 
     $OrderID = $_POST["OrderID"];
 
-    $query = "UPDATE ordertable SET OrderStatus = 'Finished' WHERE OrderID = $OrderID";
+    //picture
+    //$_FILES['PackageImage']['error'];
+    $filename = $_FILES["OrderProofOfDelivery"]["name"];
+    $tempname = $_FILES["OrderProofOfDelivery"]["tmp_name"];
+    $folder = "./image/" . $filename;    
+
+    $query = "UPDATE ordertable SET OrderStatus = 'Finished', OrderProofOfDelivery='$filename' WHERE OrderID = $OrderID";
 
     $result = mysqli_query($con, $query);
+
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        //echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        //echo "<h3>  Failed to upload image!</h3>";
+    }
+
+    //fetch donor id
+    $queryDonorID = "SELECT * FROM ordertable WHERE OrderID = '$OrderID'";
+    $resultDonorID = mysqli_query($con, $queryDonorID);
+    $rowDonorID = mysqli_fetch_assoc($resultDonorID);
+    $DonorID = $rowDonorID['DonorID'];
+
+    $OrderAmount = $rowDonorID['OrderAmount'];
+
+    //fetch donor email
+    $sqlDonorEmail =  "SELECT * FROM donor WHERE DonorID = '$DonorID'";
+    $resultDonorEmail = mysqli_query($con, $sqlDonorEmail);
+    $rowEmail = mysqli_fetch_assoc($resultDonorEmail);
+    $DonorEmail = $rowEmail['DonorEmail'];
+
+    $to = $DonorEmail;
+    $subject = "Your Order";
+    $txt = '<html><body>';
+    $txt .= '<h1 style="color:#f40;">You order have being finished by Dapur!</h1>';
+    $txt .= '<p style="color:#080;font-size:18px;">Order ID: ' . $OrderID . '</p>';
+    $txt .= '<p style="color:#080;font-size:18px;">Order Ammount: ' . $OrderAmount . '</p>';
+    $txt .= "<p style='color:#080;font-size:18px;'>Proof of delivery: </p><img src='https://ez-donor.com/image/".$filename."' alt='' />";
+    $txt .= '</body></html>';
+    $headers = "From: ezdonor1@ez-donor.com" . "\r\n" . "CC: ezdonor1@ez-donor.com";
+    $headers  .= 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    mail($to, $subject, $txt, $headers);
 
     $con->close();
 
@@ -436,3 +518,43 @@ if (isset($_POST["donorRequest"])) {
 //if (isset($_GET["paymentPayPal"])) {
 //    
 //}
+
+//donorinfo form submit
+//insert
+if (isset($_POST["donorInfoSubmit"])) {
+
+    //echo "Menjadi";
+
+    $DonorName = $_POST["DonorName"];
+    $DonorIC = $_POST["DonorIC"];
+    $DonorPhone = $_POST["DonorPhone"];
+    $DonorEmail = $_POST["DonorEmail"];
+    $UserID = $_SESSION['UserID'];
+
+    $query = "INSERT INTO donor(DonorName, DonorIC, DonorPhone, DonorEmail , UserID) VALUES('$DonorName', '$DonorIC', '$DonorPhone', '$DonorEmail' , '$UserID')";
+
+    $result = mysqli_query($con, $query);
+
+    $con->close();
+
+    header("Location:donor_info.php");
+}
+//insert
+if (isset($_POST["donorInfoUpdate"])) {
+
+    //echo "Menjadi";
+
+    $DonorName = $_POST["DonorName"];
+    $DonorIC = $_POST["DonorIC"];
+    $DonorPhone = $_POST["DonorPhone"];
+    $DonorEmail = $_POST["DonorEmail"];
+    $UserID = $_SESSION['UserID'];
+
+    $query = "UPDATE donor SET DonorName='$DonorName', DonorIC='$DonorIC', DonorPhone='$DonorPhone', DonorEmail='$DonorEmail'WHERE UserID='$UserID'";
+
+    $result = mysqli_query($con, $query);
+
+    $con->close();
+
+    header("Location:donor_info.php");
+}

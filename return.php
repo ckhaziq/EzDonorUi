@@ -12,7 +12,7 @@
             <?php
                 $_SESSION['PayerID'] = $_GET['PayerID'];
             ?>
-            <input name="paymentPayPal" type="submit" value="PayPal Payment">
+            <input name="paymentPayPal" type="submit" value="Return to Cart">
         </form>
     </div>
 </body>

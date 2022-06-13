@@ -24,7 +24,7 @@
 <body>
 <?php
 
-echo $_SESSION['PackageID'];
+//echo $_SESSION['PackageID'];
 //package
 if (isset($_SESSION['PackageID']) && $_SESSION['PackageID'] != "") {
     $PackageID = $_SESSION['PackageID'];
@@ -105,7 +105,7 @@ if (isset($_POST["CalcTotalALL"])) {
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -121,34 +121,7 @@ if (isset($_POST["CalcTotalALL"])) {
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -170,6 +143,8 @@ if (isset($_SESSION['DapurID'])) {
                     <ul class="menu-dropdown">
 
                         <li><a href="donor_dashboard.php">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+
+                        <li><a href="donor_info.php">Info</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
 
 
                         <li class="menu-hasdropdown">
@@ -361,18 +336,18 @@ if (isset($_SESSION['DapurID'])) {
 
 
                                 <div class="row layout-inline">
-                                    <div style="margin: auto;  width: 130px;  padding: 10px;">
+                                    <div style="margin: auto;  width: 95%;  padding: 0px; color:#000;">
                                         <form action="" method="POST">
                                             <input hidden id="calcPrice" name="calcPrice" type="text" value="0">
                                             <input hidden require id="calcPackage" name="calcPackage" type="text" value="0">
                                             <input hidden id="calcTotal" name="calcTotal" type="text" value="0">
-                                            <input name="CalcTotalALL" type="submit" value="Total ALL">
+                                            <input style="width: 100%; color:#000;" name="CalcTotalALL" type="submit" value="Total ALL">
                                         </form>
                                     </div>
                                     <a href="donor_catalogue_package.php" class="btn btn-update">Change Package</a>
                                     <a href="donor_catalogue_request.php" class="btn btn-update">Change Request</a>
                                     <a href="donor_catalogue_donee.php" class="btn btn-update">Change Donee</a>
-                                    <div style="margin: auto;  width: 130px;  padding: 10px;">
+                                    <div style="margin: auto;  width: 95%;  padding: 0px; color:#000;">
                                         <form action="donor_payment.php" method="POST">
                                             <input name="DoneeID" type="text" value="<?php echo $DoneeID; ?>" hidden>
                                             <input name="RequestID" type="text" value="<?php echo $RequestID; ?>" hidden>
@@ -392,7 +367,7 @@ if (isset($_SESSION['DapurID'])) {
 
                                             <input type="hidden" name="cmd" value="_xclick">
 
-                                            <input width="100%" name="paymentPayPal" type="submit" value="Order">
+                                            <input style="width: 100%; color:#000;" name="paymentPayPal" type="submit" value="Order">
                                         </form>
                                     </div>
                                 </div>

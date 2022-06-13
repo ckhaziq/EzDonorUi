@@ -29,7 +29,7 @@
 
     <div class="topnav">
         <a href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -68,11 +68,20 @@
                     <input type="password" id="password" name="loginPassword" placeholder="password" required>
                 </div>
 
-                <div>
+                <div>                   
                     <input class="button" type="submit" name="loginSubmit" value="Log In">
                 </div>
 
             </form>
+            <header class="login__header">
+                    </svg>Create new account.</h2>
+            </header>
+            
+                <div>
+                    <form action="register.php" class="login__form" method="POST">
+                        <input class="button" type="submit" name="registerSubmit" value="Register">
+                    </form>
+                </div>
 
         </div>
 

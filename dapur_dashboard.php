@@ -1,4 +1,4 @@
-<?php include 'dbCon.php'; ?>
+<?php include 'dbCon.php';?>
 <!DOCTYPE html>
 <html>
 
@@ -22,58 +22,36 @@
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
-<?php
-    
-    //request
-    //TotalRequest
-    $resultTotalRequest = mysqli_query($con, "SELECT COUNT(*) AS TotalTotalRequest FROM request");
-	$num_rowsTotalRequest = mysqli_fetch_assoc($resultTotalRequest);
-    //Approved
-    $resultApproved = mysqli_query($con, "SELECT COUNT(*) AS TotalApproved FROM approval WHERE ApprovalStatus='Approve'");
-	$num_rowsApproved = mysqli_fetch_assoc($resultApproved);
-    //WaitingApproval
-    $resultWaitingApproval = mysqli_query($con, "SELECT COUNT(*) AS TotalWaitingApproval FROM request WHERE ApprovalID=0");
-	$num_rowsWaitingApproval = mysqli_fetch_assoc($resultWaitingApproval);
-    //Rejected
-    $resultRejected = mysqli_query($con, "SELECT COUNT(*) AS TotalRejected FROM approval WHERE ApprovalStatus='Decline'");
-	$num_rowsRejected = mysqli_fetch_assoc($resultRejected);
+<?php 
 
-    $TotalTotalRequest100 = $num_rowsTotalRequest['TotalTotalRequest'];
-    $TotalApproved100 = $num_rowsApproved['TotalApproved'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
-    $TotalWaitingApproval100 = $num_rowsWaitingApproval['TotalWaitingApproval'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
-    $TotalRejected100 = $num_rowsRejected['TotalRejected'] / $num_rowsTotalRequest['TotalTotalRequest'] * 100;
-    
-    $dataPointsRequest = array( 
-        array("label"=>"Approved", "y"=>$TotalApproved100),
-        array("label"=>"Waiting Approval", "y"=>$TotalWaitingApproval100),
-        array("label"=>"Rejected", "y"=>$TotalRejected100)
-    );
+    $DapurID = $_SESSION['DapurID'];
 
+    //echo $_SESSION['DapurID'];
 
     //TotalPackage
-    $resultTotalPackage = mysqli_query($con, "SELECT COUNT(*) AS TotalPackage FROM package WHERE DapurID = 1");
+    $resultTotalPackage = mysqli_query($con, "SELECT COUNT(*) AS TotalPackage FROM package WHERE DapurID = '$DapurID'");
 	$num_rowsTotalPackage = mysqli_fetch_assoc($resultTotalPackage);
     //PopularPackage
-    $resultPopularPackage = mysqli_query($con, "SELECT COUNT(*) AS PopularPackage FROM ordertable GROUP BY PackageID ORDER BY 'value_occurrence' DESC LIMIT 1");
+    $resultPopularPackage = mysqli_query($con, "SELECT COUNT(*) AS PopularPackage FROM ordertable WHERE DapurID = '$DapurID' GROUP BY PackageID ORDER BY 'value_occurrence' DESC LIMIT 1");
 	$num_rowsPopularPackage = mysqli_fetch_assoc($resultPopularPackage);
     //TotalPopularPackage
     $PopularPackage = $num_rowsPopularPackage['PopularPackage'];
-    $resultTotalPopularPackage = mysqli_query($con, "SELECT COUNT(*) AS TotalPopularPackage FROM ordertable WHERE DapurID = 1 AND PackageID = $PopularPackage");
+    $resultTotalPopularPackage = mysqli_query($con, "SELECT COUNT(*) AS TotalPopularPackage FROM ordertable WHERE DapurID = '$DapurID' AND PackageID = $PopularPackage");
 	$num_rowsTotalPopularPackage = mysqli_fetch_assoc($resultTotalPopularPackage);
     //TotalOther
-    $resultTotalOther = mysqli_query($con, "SELECT COUNT(*) AS TotalOther FROM ordertable WHERE DapurID = 1 AND PackageID != $PopularPackage");
+    $resultTotalOther = mysqli_query($con, "SELECT COUNT(*) AS TotalOther FROM ordertable WHERE DapurID = '$DapurID' AND PackageID != $PopularPackage");
 	$num_rowsTotalOther = mysqli_fetch_assoc($resultTotalOther);
     //TotalOrder
-    $resultTotalOrder = mysqli_query($con, "SELECT COUNT(*) AS TotalOrder FROM ordertable WHERE DapurID = 1");
+    $resultTotalOrder = mysqli_query($con, "SELECT COUNT(*) AS TotalOrder FROM ordertable WHERE DapurID = '$DapurID'");
 	$num_rowsTotalOrder = mysqli_fetch_assoc($resultTotalOrder);
     //NewOrder
-    $resultNewOrder = mysqli_query($con, "SELECT COUNT(*) AS NewOrder FROM ordertable WHERE DapurID = 1 AND OrderStatus = 'New'");
+    $resultNewOrder = mysqli_query($con, "SELECT COUNT(*) AS NewOrder FROM ordertable WHERE DapurID = '$DapurID' AND OrderStatus = 'New'");
 	$num_rowsNewOrder = mysqli_fetch_assoc($resultNewOrder);
     //PendingOrder
-    $resultPendingOrder = mysqli_query($con, "SELECT COUNT(*) AS PendingOrder FROM ordertable WHERE DapurID = 1 AND OrderStatus = 'Pending'");
+    $resultPendingOrder = mysqli_query($con, "SELECT COUNT(*) AS PendingOrder FROM ordertable WHERE DapurID = '$DapurID' AND OrderStatus = 'Pending'");
 	$num_rowsPendingOrder = mysqli_fetch_assoc($resultPendingOrder);
     //FinishOrder
-    $resultFinishOrder = mysqli_query($con, "SELECT COUNT(*) AS FinishOrder FROM ordertable WHERE DapurID = 1 AND OrderStatus = 'Pending'");
+    $resultFinishOrder = mysqli_query($con, "SELECT COUNT(*) AS FinishOrder FROM ordertable WHERE DapurID = '$DapurID' AND OrderStatus = 'Finished'");
 	$num_rowsFinishOrder = mysqli_fetch_assoc($resultFinishOrder);    
 
 
@@ -145,7 +123,7 @@ window.onload = function() {
 
     <div class="topnav">
         <a class="active" href="index.php">Home</a>
-        <a href="request.html">Request</a>
+        <a href="request.php">Request</a>
         <div class="dropdown">
             <button class="dropbtn">Catalogue
                 <i class="fa fa-caret-down"></i>
@@ -161,34 +139,7 @@ window.onload = function() {
             <?php if (isset($_SESSION['UserID'])) {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
-<?php
-if (isset($_SESSION['AdminID'])) {
-?>
-	<a href="admin_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DoneeID'])) {
-?>
-	<a href="donee_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DonorID'])) {
-?>
-	<a href="donor_dashboard.php">Dashboard</a>
-<?php
-}
-?>
-<?php
-if (isset($_SESSION['DapurID'])) {
-?>
-	<a href="dapur_dashboard.php">Dashboard</a>
-<?php
-}
-?>
+
             <?php } else { ?>
                 <a href="login.php">Login</a>
             <?php } ?>
@@ -359,37 +310,7 @@ if (isset($_SESSION['DapurID'])) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="span3">
-                                    <div style="border-radius: 10px; margin: 10px;" class="widget bg-danger">
-                                        <div class="row-fluid">
-                                            <div class="span4">
-                                                <i class="icon icon-search icon-white"></i>
-                                            </div>
-                                            <div class="span8 text-right">
-                                                <span>xxxx</span>
-                                                <h2 class="font-bold">
-                                                    xxxx
-                                                </h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span3">
-                                    <div style="border-radius: 10px; margin: 10px;" class="widget bg-danger">
-                                        <div class="row-fluid">
-                                            <div class="span4">
-                                                <i class="icon icon-search icon-white"></i>
-                                            </div>
-                                            <div class="span8 text-right">
-                                                <span>xxx</span>
-                                                <h2 class="font-bold">
-                                                    xxx
-                                                </h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -400,7 +321,7 @@ if (isset($_SESSION['DapurID'])) {
                             <div class="col">
                                 <div class="square-card">
                                     <div class="card-title">
-                                        <h4>User</h4>
+                                        <h4>Most Popular</h4>
                                     </div>
                                     <div class="cta">
                                         <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
@@ -410,7 +331,7 @@ if (isset($_SESSION['DapurID'])) {
                             <div class="col">
                                 <div class="square-card">
                                     <div class="card-title">
-                                        <h4>Request</h4>
+                                        <h4>Order</h4>
                                     </div>
                                     <div class="cta">
                                         <div id="chartContainer2" style="height: 370px; width: 100%;"></div>

@@ -50,6 +50,6 @@ if (SANDBOX === TRUE) {
 // PayPal IPN Data Validate URL
 define('PAYPAL_URL', $paypal_url);
 
-//if(isset($_SESSION['UserID'])){
+//if(isset($_SESSION['UserID']) && $_SESSION['UserID'] != ""){
 //     echo $_SESSION['UserID'];
 //}

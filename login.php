@@ -9,16 +9,16 @@
 
     <?php
 
-    if(isset($_SESSION['AdminID']) && isset($_SESSION['UserID'])){
+    if(isset($_SESSION['AdminID']) && isset($_SESSION['UserID']) && $_SESSION['UserID'] != ""){
         header("Location:admin_dashboard.php");
     }
-    if(isset($_SESSION['DonorID']) && isset($_SESSION['UserID'])){
+    if(isset($_SESSION['DonorID']) && isset($_SESSION['UserID']) && $_SESSION['UserID'] != ""){
         header("Location:donor_dashboard.php");
     }
-    if(isset($_SESSION['DoneeID']) && isset($_SESSION['UserID'])){
+    if(isset($_SESSION['DoneeID']) && isset($_SESSION['UserID']) && $_SESSION['UserID'] != ""){
         header("Location:donee_dashboard.php");
     }
-    if(isset($_SESSION['DapurID']) && isset($_SESSION['UserID'])){
+    if(isset($_SESSION['DapurID']) && isset($_SESSION['UserID']) && $_SESSION['UserID'] != ""){
         header("Location:dapur_dashboard.php");
     }
 ?>
@@ -46,9 +46,9 @@
         </div>
     </div>
 
-    <div class="loginform">
+    <div style="margin:auto;" class="loginform">
 
-        <div class="login">
+        <div style="margin:auto;" class="login">
 
             <header class="login__header">
                 <h2><svg class="icon">

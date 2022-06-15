@@ -132,7 +132,7 @@ $dataPointsUser = array(
         </div>
          
         <div class="topnav-right">
-            <?php if (isset($_SESSION['UserID'])) {
+            <?php if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != "") {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
 

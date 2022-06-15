@@ -23,7 +23,7 @@
   </div> 
    
   <div class="topnav-right">
-    <?php if (isset($_SESSION['UserID'])) {
+    <?php if (isset($_SESSION['UserID']) && $_SESSION['UserID'] != "") {
                 //echo $_SESSION['AdminID'] ?>
                 <a href="logout.php">Log Out</a>
 
@@ -37,13 +37,13 @@
   <div class="hero-text">
     <h1 style="font-size:50px">Because Your Help Means A Lot For Them</h1>
     <p>Your action make Their World Better</p>
-    <a href="#"><button>Donate Now</button></a> 
+    <a href="login.php"><button>Donate Now</button></a> 
   </div>
 </div>
 
 <footer>
   <p>Author: Hege Refsnes<br>
-  <a href="mailto:hege@example.com">hege@example.com</a></p>
+  <a href="mailto:ezdonor1e@ez-donor.com">hege@example.com</a></p>
   <a href="login.php"><button>Donate Now</button></a>
 </footer>
 
